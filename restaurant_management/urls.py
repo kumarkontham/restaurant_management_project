@@ -28,6 +28,5 @@ urlpatterns = [
 ]
 
 def custom_404_view(request,exception):
-    if request.accepts('text/html'):
-        return render(request,'custom_404.html',status=404)
+    return render(request,'custom_404.html',status=404)
 handler404 = custom_404_view
