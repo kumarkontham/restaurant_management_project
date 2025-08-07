@@ -16,6 +16,8 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path,include
+from django.conf.urls import handler404
+from django.shortcuts import render
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -24,3 +26,9 @@ urlpatterns = [
     path('api/products/',include('products.urls')),
     path('api/orders/',include('orders.urls')),
 ]
+
+def custom_404_view(request,exception):
+    if request.accepts('text/html'):
+        return render(request,'custom_404.html',status=404)
+    return JsonResponse({"error":"The requested source is not found","status":404},status=404)
+handler404 = custom_404_view
