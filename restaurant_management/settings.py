@@ -26,8 +26,7 @@ SECRET_KEY = 'django-insecure-s^x_u!itekxd=@a3o3zv4d%hw$j6d#2v358wgltxl8rc(-^t&p
 #it enable certain security features and controls the error messages when somthing goes wrong in the code
 #it does not reveal the error messages like variables ,user data simply page  like 404 or 500
 DEBUG = False
-#whitelists domains that can access to prevent Host Header attacks
-ALLOWED_HOSTS = ['127.0.0.1','localhost']
+ALLOWED_HOSTS = ['127.0.0.1','localhost'] 
 
 
 # Application definition
