@@ -9,7 +9,6 @@ def get(self,request):
     restaurant = Restaurant.objects.first()
     name = restaurant.name if restaurant else settings.RESTAURANT_NAME
     return Response({"name":name})
-@require_GET
 def home_page(request):
     restaurant = Restaurant.objects.first()
     restaurant = restaurant.name if restaurant else settings.RESTAURANT_NAME
