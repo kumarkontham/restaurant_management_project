@@ -6,7 +6,7 @@ from .models import Restaurant
 def home_page(request):
     """display restaurantname on the home page """
     restaurant = Restaurant.objects.first()
-    restaurant_name = restaurant.name if restaurant else settings.RESTAURANT_NAME
+    restaurant_name = restaurant.name if restaurant else getattr(settings,"RESTAURANT_NAME","culture food")
     return render(request,'home/home.html',{"restaurant_name":restaurant_name})
 @api_view(["GET"])
 def get_restaurant_details(request):
