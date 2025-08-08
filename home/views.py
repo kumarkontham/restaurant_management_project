@@ -4,14 +4,16 @@ from django.conf import settings
 from rest_framework.decorators import api_view
 from .models import Restaurant
 def home_page(request):
-    """display restaurantname on the home page """
+    """display restaurantname on the home page
+        fetch from the database if available otherwise get the name from settings file """
     restaurant = Restaurant.objects.first()
     restaurant_name = restaurant.name if restaurant else getattr(settings,"RESTAURANT_NAME","culture food")
     return render(request,'home/home.html',{"restaurant_name":restaurant_name})
 @api_view(["GET"])
 def get_restaurant_details(request):
+    """display the restaurant name in Json format"""
     restaurant = Restaurant.objects.first()
-    name = restaurant.name if restaurant else settings.RESTAURANT_NAME
+    name = restaurant.name if restaurant else getattr(settings,"RESTAURANT_NAME","culture food")
     return Response({"name":name})
 
     
