@@ -18,6 +18,6 @@ def get_restaurant_details(request):
 def about_us(request):
     name=get_restaurant_name()
     description=("hii")
-    return render(request,"home/about.html",{"restaurant_name"=name})
+    return render(request,"home/about.html",{"restaurant_name":name})
 
     
