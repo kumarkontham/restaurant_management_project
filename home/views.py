@@ -1,6 +1,6 @@
+from django.conf import settings
 from django.shortcuts import render
 from rest_framework.response import Response
-from django.conf import settings
 from rest_framework.decorators import api_view
 from .models import Restaurant
 def home_page(request):
