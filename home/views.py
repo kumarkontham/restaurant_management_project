@@ -15,6 +15,9 @@ def get_restaurant_details(request):
     restaurant = Restaurant.objects.first()
     name = restaurant.name if restaurant else getattr(settings,"RESTAURANT_NAME","culture food")
     return Response({"name":name})
-def 
+def about_us(request):
+    name=get_restaurant_name()
+    description=("hii")
+    return render(request,"home/about.html",{"restaurant_name"=name})
 
     
