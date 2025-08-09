@@ -6,7 +6,7 @@ class Restaurant(models.Model):
     def __str__(self):
         return self.name
 class MenuItems(models.Model):
-    name = models.CharField(max_length=100)
+    mname = models.CharField(max_length=100)
     url = models.CharField(max_length=200)
     def __str__(self):
-        return self.name
+        return self.mname
