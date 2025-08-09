@@ -23,8 +23,8 @@ def about_us(request):
     "Here we are providing service for delicious and freshly prepared meals"
     "with ingredients from local farms.Our goal is to provide healthy and tasty food "
     return render(request,"home/about.html",{"restaurant_name":name})
-def menu_items(request):
-    """create the hardcoded list """
+def hardcoded_items(request):
+    """create the hardcoded list  """
     menu_items = [{"id" : 1,"mname" : "Starters" ,"url" : '#'},
     {"id" : 2,"mname" : "Mains","url" : "#"},
     {"id" : 3,"mname" : "Desserts","url" : "#"},
