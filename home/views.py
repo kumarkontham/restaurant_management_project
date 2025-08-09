@@ -2,7 +2,7 @@ from django.conf import settings
 from django.shortcuts import render
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
-from .models import Restaurant
+from .models import Restaurant,MenuItems
 def home_page(request):
     """display restaurantname on the home page
         fetch from the database if available otherwise get the name from settings file """
@@ -24,8 +24,9 @@ def about_us(request):
     "with ingredients from local farms.Our goal is to provide healthy and tasty food "
     return render(request,"home/about.html",{"restaurant_name":name})
 def menu_items(request):
-    menu_items=[{"id":1,"name":"Home","url":'/'},
-                {"id":2,"name":"AboutUs","url":"/about/"}]
+    # menu_items=[{"id":1,"name":"Home","url":'/'},
+    #             {"id":2,"name":"AboutUs","url":"/about/"}]
+    menu_items = MenuItems.objects.all()
     return render(request,'home/menu.html',{"menu_items":menu_items})
     
 
