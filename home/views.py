@@ -5,7 +5,7 @@ from rest_framework.decorators import api_view
 from .models import Restaurant,MenuItems
 def home_page(request):
     """display restaurantname on the home page
-        fetch from the database if available otherwise get the name from settings file """
+    fetch from the database if available otherwise get the name from settings file """
     restaurant = Restaurant.objects.first()
     restaurant_name = restaurant.name if restaurant else getattr(settings,"RESTAURANT_NAME","culture food")
     return render(request,'home/home.html',{"restaurant_name":restaurant_name})
@@ -24,7 +24,7 @@ def about_us(request):
     "with ingredients from local farms.Our goal is to provide healthy and tasty food "
     return render(request,"home/about.html",{"restaurant_name":name})
 def hardcoded_items(request):
-    """create the hardcoded list  """
+    """create the hardcoded list inside the list menu items are added in dictionary format key,value pairs whenever user wants to retrieve the data using the template file   """
     menu_items = [{"id" : 1,"mname" : "Starters" ,"url" : '#'},
     {"id" : 2,"mname" : "Mains","url" : "#"},
     {"id" : 3,"mname" : "Desserts","url" : "#"},
