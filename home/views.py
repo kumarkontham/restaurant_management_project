@@ -24,10 +24,10 @@ def about_us(request):
     "with ingredients from local farms.Our goal is to provide healthy and tasty food "
     return render(request,"home/about.html",{"restaurant_name":name})
 def menu_items(request):
-    menu_items=[{"id":1,"Starters":"Home","url":'#'},
-    {"id":2,"mname":"Mains","url":"#"},
-    {"id":3,"mname":"Desserts","url":"#"},
-    {"id":4,"mname":"Drinks","url":"#"}]
+    menu_items = [{"id" : 1,"Starters" : "Home","url" : '#'},
+    {"id" : 2,"mname" : "Mains","url" : "#"},
+    {"id" : 3,"mname" : "Desserts","url" : "#"},
+    {"id" : 4,"mname" : "Drinks","url" : "#"}]
     return render(request,'home/menu.html',{"menu_items":menu_items})
     
 
