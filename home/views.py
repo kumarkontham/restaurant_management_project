@@ -23,10 +23,10 @@ def about_us(request):
     return render(request,"home/about.html",{"restaurant_name":name,"description":description})
 def hardcoded_items(request):
     """create the hardcoded list inside the list menu items are added in dictionary format key,value pairs whenever user wants to retrieve the data using the template file   """
-    menu_items = [{"id" : 1,"mname" : "Starters" ,"url" : '#'},
-    {"id" : 2,"mname" : "Mains","url" : "#"},
-    {"id" : 3,"mname" : "Desserts","url" : "#"},
-    {"id" : 4,"mname" : "Drinks","url" : "#"}]
+    menu_items = [{"id" : 1,"menu_name" : "Starters" ,"url" : '#'},
+    {"id" : 2,"menu_name" : "Mains","url" : "#"},
+    {"id" : 3,"menu_name" : "Desserts","url" : "#"},
+    {"id" : 4,"menu_name" : "Drinks","url" : "#"}]
     return render(request, 'home/menu.html', {"menu_items" : menu_items})
     
 
