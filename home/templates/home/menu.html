@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Menu items</title>
+    </head>
+    <body>
+        <ul>
+            {%for i in menu_items%}
+            <li>
+                <a href="{{i.url}}">{{i.name}}</a>
+            </li>
+            {%endfor%}
+        </ul>
+    </body>
+</html>
