@@ -24,9 +24,9 @@ def about_us(request):
     "with ingredients from local farms.Our goal is to provide healthy and tasty food "
     return render(request,"home/about.html",{"restaurant_name":name})
 def menu_items(request):
-    # menu_items=[{"id":1,"name":"Home","url":'/'},
-    #             {"id":2,"name":"AboutUs","url":"/about/"}]
-    menu_items = MenuItems.objects.all()
+    menu_items=[{"id":1,"name":"Home","url":'/'},
+                {"id":2,"name":"AboutUs","url":"/about/"}]
+    #menu_items = MenuItems.objects.all()
     return render(request,'home/menu.html',{"menu_items":menu_items})
     
 
