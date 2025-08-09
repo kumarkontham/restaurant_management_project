@@ -25,8 +25,7 @@ def about_us(request):
     return render(request,"home/about.html",{"restaurant_name":name})
 def menu_items(request):
     menu_items=[{"id":1,"name":"Home","url":'/'},
-                {"id":2,"name":"AboutUs","url":"/about/"}]
-    #menu_items = MenuItems.objects.all()
+    {"id":2,"name":"AboutUs","url":"/about/"}]
     return render(request,'home/menu.html',{"menu_items":menu_items})
     
 
