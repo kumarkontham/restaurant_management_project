@@ -19,10 +19,8 @@ def get_restaurant_name():
     return getattr(settings,"RESTAURANT_NAME","culture food")
 def about_us(request):
     name=get_restaurant_name()
-    description=f"welcome to {name} restaurant!"
-    "Here we are providing service for delicious and freshly prepared meals"
-    "with ingredients from local farms.Our goal is to provide healthy and tasty food "
-    return render(request,"home/about.html",{"restaurant_name":name})
+    description=f"welcome to {name} restaurant! Here we are providing service for delicious and freshly prepared meals with ingredients from local farms.Our goal is to provide healthy and tasty food "
+    return render(request,"home/about.html",{"restaurant_name":name,"description":description})
 def hardcoded_items(request):
     """create the hardcoded list inside the list menu items are added in dictionary format key,value pairs whenever user wants to retrieve the data using the template file   """
     menu_items = [{"id" : 1,"mname" : "Starters" ,"url" : '#'},
