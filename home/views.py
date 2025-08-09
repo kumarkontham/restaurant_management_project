@@ -19,7 +19,7 @@ def get_restaurant_name():
     return getattr(settings,"RESTAURANT_NAME","culture food")
 def about_us(request):
     name=get_restaurant_name()
-    description="welcome to", name,"restaurant! 
+    description="welcome to"+ name +"restaurant! 
     "Here we are providing service for delicious and freshly prepared meals with ingredients from local farms."
     "Our goal is to provide healthy and tasty food "
     return render(request,"home/about.html",{"restaurant_name":name,"description":description})
