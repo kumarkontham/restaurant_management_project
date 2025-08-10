@@ -18,13 +18,7 @@ def get_restaurant_name(request):
         return Response({"error":"No Restaurant found"},status=404)
     name = restaurant.name
     return render(request,'home/home.html',{"name":name})
-def hardcoded_items(request):
-    """create the hardcoded list inside the list menu items are added in dictionary format key,value pairs whenever user wants to retrieve the data using the template file   """
-    menu_items = [{"id" : 1,"menu_name" : "Starters" ,"url" : '#'},
-    {"id" : 2,"menu_name" : "Mains","url" : "#"},
-    {"id" : 3,"menu_name" : "Desserts","url" : "#"},
-    {"id" : 4,"menu_name" : "Drinks","url" : "#"}]
-    return render(request, 'home/menu.html', {"menu_items" : menu_items})
+
     
 
 
