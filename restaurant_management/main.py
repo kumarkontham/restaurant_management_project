@@ -1,4 +1,4 @@
-def place_holder():
+def display_success_message():
     return "basic css added successfully!."
 if __name__ == "__main__":
-    print(place_holder())
+    print(display_success_message())
