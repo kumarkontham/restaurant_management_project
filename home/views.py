@@ -13,8 +13,11 @@ def home_page(request):
 @api_view(["GET"])
 def get_restaurant_details(request):
     """display the restaurant name in Json format"""
+    
     restaurant = Restaurant.objects.first()
-    name = restaurant.name if restaurant else getattr(settings,"RESTAURANT_NAME","culture food")
+    if not restaurant:
+        return Response({"error":"No Restaurant found"},status=404)
+    name = restaurant.name
     return Response({"name":name})
 def get_restaurant_name():
     return getattr(settings,"RESTAURANT_NAME","culture food")
