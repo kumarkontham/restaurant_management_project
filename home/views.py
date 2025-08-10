@@ -14,7 +14,7 @@ def get_restaurant_name(request):
     """display the restaurant name in Json format"""
     restaurant = Restaurant.objects.first()
     if not restaurant:
-        return render(,status=404)
+        return render(request,'custom_404.html')
     else:
         name = restaurant.name
         return render(request,'home/home.html',{"name":name})
