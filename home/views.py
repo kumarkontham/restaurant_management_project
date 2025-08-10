@@ -1,4 +1,5 @@
 from django.conf import settings
+from django.http import JsonResponse
 from django.shortcuts import render
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
@@ -13,11 +14,8 @@ def home_page(request):
 def get_restaurant_name(request):
     """display the restaurant name in Json format"""
     restaurant = Restaurant.objects.first()
-    if not restaurant:
-        return render(request,'custom_404.html')
-    else:
-        name = restaurant.name
-        return render(request,'home/home.html',{"name":name})
+    name = restaurant.name if restaurant else getattr(settings,"RESTAURANT_NAME","culture food")
+    return JsonResponse("restaurant_name":name)
 
     
 
