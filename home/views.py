@@ -24,6 +24,22 @@ def about_us(request):
     "Here we are providing service for delicious and freshly prepared meals"
     "with ingredients from local farms.Our goal is to provide healthy and tasty food "
     return render(request,"home/about.html",{"restaurant_name":name})
+def Contact_us(request):
+    submitted = False
+    if request.method == "POST":
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            submitted =True
+    else:
+        form = ContactForm()
+    context = {
+        "form":form,
+        'submitted':submitted,
+        'contact_email':'kk@gmail.com',
+        'contact_phone':'87575735322',
+        'contact_address':'karimnagar',
+    }
+    return render(request,'home/Contact_us.html',context)
     
 
     
