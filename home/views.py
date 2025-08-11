@@ -9,6 +9,7 @@ def home_page(request):
         fetch from the database if available otherwise get the name from settings file """
     restaurant = Restaurant.objects.first()
     restaurant_name = restaurant.name if restaurant else getattr(settings,"RESTAURANT_NAME","culture food")
+    contact_number = restaurant.phone if restaurant else
     return render(request,'home/home.html',{"restaurant_name":restaurant_name})
 @api_view(["GET"])
 def get_restaurant_details(request):
