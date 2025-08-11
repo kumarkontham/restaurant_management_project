@@ -23,10 +23,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-s^x_u!itekxd=@a3o3zv4d%hw$j6d#2v358wgltxl8rc(-^t&p'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-#it enable certain security features and controls the error messages when somthing goes wrong in the code
-#it does not reveal the error messages like variables ,user data simply page  like 404 or 500
-DEBUG = False
-ALLOWED_HOSTS = ['127.0.0.1','localhost'] 
+DEBUG = True
+
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -123,9 +122,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = 'static/'
-STATICFILES_DIRS = [BASE_DIR / "static"]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+RESTAURANT_NAME = "culture food"
+RESTAURANT_CONTACT ="+91-6754321564"
