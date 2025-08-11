@@ -41,6 +41,14 @@ def Contact_us(request):
         'contact_address':'karimnagar',
     }
     return render(request,'home/Contact_us.html',context)
+@api_view(['GET'])
+class Menu_items(request):
+    Menu_Items = [{"id":1,"item_name":"chickeen_curry","price":"200.00"},
+    {"id":2,"item_name":"sambar_rice","price":"99.00"},
+    {"id":3,"item_name":"Tiffins","price":"30.00"},
+    {"id":4,"item_name":"Drinks","price":"55.00"},]
+    return Response(Menu_Items)
+
     
 
     
