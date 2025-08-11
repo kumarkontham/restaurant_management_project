@@ -3,3 +3,7 @@ def display_success_message():
     
 if __name__ == "__main__":
     print(display_success_message())
+def get_contact():
+    return "retrive the restaurant contact number show on home page"
+if __name__ == "__main__":
+    print(get_contact())
