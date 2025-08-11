@@ -24,5 +24,6 @@ def about_us(request):
     "Here we are providing service for delicious and freshly prepared meals"
     "with ingredients from local farms.Our goal is to provide healthy and tasty food "
     return render(request,"home/about.html",{"restaurant_name":name})
+    
 
     
