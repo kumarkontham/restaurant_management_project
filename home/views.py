@@ -47,7 +47,7 @@ def Menu_items(request):
     {"id":2,"item_name":"sambar_rice","price":"99.00"},
     {"id":3,"item_name":"Tiffins","price":"30.00"},
     {"id":4,"item_name":"Drinks","price":"55.00"},]
-    context = Menu_Items
+    context = {'Menu_Items':Menu_Items}
     return render(request,'home/menu.html',context)
 
     
