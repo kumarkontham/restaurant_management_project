@@ -3,6 +3,7 @@ from django.shortcuts import render
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from .models import Restaurant
+from .forms import ContactForm
 def home_page(request):
     """display restaurantname on the home page
         fetch from the database if available otherwise get the name from settings file """
