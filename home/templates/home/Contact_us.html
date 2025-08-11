@@ -6,7 +6,21 @@
     <body>
         <div>
             <h1>Contact Us</h1>
-            {% if sub%}
+            {% if submitted %}
+            <div class="success">
+                Thank you! Your message has been received 
+            </div>
+            {% endif %}
+            <div>
+                <p><strong>Address:</strong>{{contact_address}}</p>
+                <p><strong>Email:</strong>{{contact_email}}</p>
+                <p><strong>Phone:</strong>{{contact_phone}}</p>
+            </div>
+            <form method="POST">
+                {% csrf_token %}
+                {{form.as_p}}
+                <button type="submit">send message</button>
+            </form>
         </div>
     </body>
 </html>
