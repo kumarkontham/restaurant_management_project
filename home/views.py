@@ -49,7 +49,8 @@ def Menu_items(request):
     {"id":4,"item_name":"Drinks","price":"55.00"},]
     context = {'Menu_Items':Menu_Items}
     return render(request,'home/menu.html',context)
-def reservation_view
+def reservation_view(request):
+    return render(request,'home/reservation.html')
 
     
 
