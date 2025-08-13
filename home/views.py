@@ -51,7 +51,7 @@ def Menu_items(request):
     return render(request,'home/menu.html',context)
 def reservation_view(request):
     place_holder = 'This page is under construction!. Reservation features will be available soon.'
-    return render(request,'home/reservation.html')
+    return render(request,'home/reservation.html',{"message":place_holder})
 
     
 
