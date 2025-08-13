@@ -1,4 +1,4 @@
-place_holder = 'reservation page is under construction!.'
+place_holder = 'reservation page is under construction!. Reservation features available soon.'
 def reservation_message():
     return place_holder
 def display_success_message():
