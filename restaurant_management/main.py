@@ -1,3 +1,6 @@
+place_holder = 'reservation page is under construction!.'
+def reservation_message():
+    return place_holder
 def display_success_message():
     return "basic css styles added  successfully for the home page"
     
