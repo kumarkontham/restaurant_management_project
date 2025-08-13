@@ -50,6 +50,7 @@ def Menu_items(request):
     context = {'Menu_Items':Menu_Items}
     return render(request,'home/menu.html',context)
 def reservation_view(request):
+    place_holder = 'This page is under construction!. '
     return render(request,'home/reservation.html')
 
     
