@@ -1,9 +1,7 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>Menu items</title>
-    </head>
-    <body>
+{% extends "home.html" %}
+        <title>{%block title%}Menu items{%endblock%}</title>
+    {%block content %}
+    <div>
         <ul>
             {%for i in menu_items%}
             <li>
@@ -11,5 +9,5 @@
             </li>
             {%endfor%}
         </ul>
-    </body>
-</html>
+    </div>
+    {% endblock %}
