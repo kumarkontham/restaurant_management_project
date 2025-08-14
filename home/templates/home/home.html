@@ -1,9 +1,10 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>Restaurant name</title>
+        <title>{%block title%}Restaurant name{% endblock %}</title>
         <link rel="stylesheet" href="{% static 'home.css' %}">
     </head>
+    <body>
         <header>
             <h5>Welcome to my {{restaurant_name}} Enjoy our food!</h5>
             <nav>
@@ -11,10 +12,12 @@
                 <a href="/about/",style='text-decoration:none;color:black;'>AboutUs</a>
             </nav>
         </header>
+        <main>
         {% block content %}
         {% endblock %}
+        </main>
         <footer>
-            <p> &copy; {{curr_year}} 
+            <p> &copy; {{curr_year}} All Rights Reserved
             <li>Contact:<b>{{contact}}</b></li>
         </footer>
     </body>
