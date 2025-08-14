@@ -17,5 +17,16 @@ header{
     margin: 2rem auto;
     padding: 0 1rem;
 }
+nav{
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+nav a{
+    text-decoration: none;
+    background-color: black;
+    color: #ffffff;
+}
 
 
