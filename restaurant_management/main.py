@@ -6,7 +6,7 @@ def reservation_message(place_holder:str = "reservation page is under constructi
     return f'{place_holder}'
 def display_success_message():
     return "basic css styles added  successfully for the home page"
-def retrive_contact():
+def retrieve_contact():
     return "+91-8976543245"
 if __name__ == "__main__":
     print(generate_footer())
