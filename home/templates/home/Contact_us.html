@@ -1,9 +1,6 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>ContactUs</title>
-    </head>
-    <body>
+{% extends "home.html"%}
+        <title>{%block title%}ContactUs{%endblock%}</title>
+    {%block content %}
         <div>
             <h1>Contact Us</h1>
             {% if submitted %}
@@ -22,5 +19,5 @@
                 <button type="submit">send message</button>
             </form>
         </div>
-    </body>
-</html>
+    {%endblock%}
+    
