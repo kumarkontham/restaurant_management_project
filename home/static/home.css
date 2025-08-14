@@ -29,7 +29,10 @@ nav a{
     color: #ffffff;
 }
 footer{
-    
+    width: 100%;
+    background-color: rgb(19, 19, 19);
+    color: #ffffff;
 }
+
 
 
