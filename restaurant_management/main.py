@@ -1,6 +1,7 @@
 import json
 from datetime import datetime
 def error_handling():
+    """in the  process of retriving the data occur any errors like database errors and object not found errors and any unexpected errors occurred display the messages in Json format"""
     try:
         from django.http import JsonResponse
         from django.db import DatabaseError
