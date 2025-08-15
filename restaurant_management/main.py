@@ -1,5 +1,6 @@
+import json
 from datetime import datetime
-def error_handling(request):
+def error_handling():
     try:
         from django.http import JsonResponse
         from django.db import DatabaseError
@@ -24,6 +25,9 @@ def display_success_message():
 def retrieve_contact():
     return "+91-8976543245"
 if __name__ == "__main__":
-    print(error_handling())
+    try:
+        print(error_handling())
+    except Exception as e:
+        print(json.dumps({"status"=500,"error":str(e)}))
 
 
