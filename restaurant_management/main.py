@@ -12,7 +12,7 @@ CONTACT_HTML ="""
 function ValidateContactForm(){
     const name = document.forms["ContactForm"]["name"].value.trim()
     const email = document.forms["ContactForm"]["email"].value.trim()
-    if (name==""||email ==""){
+    if (name=="" || email ==""){
         alert("please fill name and email both")
         return false;
         }
