@@ -5,13 +5,13 @@ def error_handling(request):
         from django.db import DatabaseError
         from django.apps import apps
         Restaurant = apps.get_model(app_label='restaurant',model_name='Restaurant')
-        restaurant Restaurant.objects.first()
+        restaurant =  Restaurant.objects.first()
         if restaurant is None:
             return JsonResponse({"error":"No restaurant found in the database!."},status=404)
         else:
-            return JsonResponse({"name":getattr(restaurant,"name")})
+            return JsonResponse({"name": restaurant.name })
     except DatabaseError:
-        return JsonResponse({"error":"A database error occured!. pease try again later."},status=500)
+        return JsonResponse({"error":"A database error occurred!. please try again later."},status=500)
     except Exception as e:
         return JsonResponse({"error":f"An unexpected error occured!.{str(e)}"},status=500)
 def generate_footer(notice:str = "All Rights Reserved!."):
