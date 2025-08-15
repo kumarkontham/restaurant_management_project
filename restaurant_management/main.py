@@ -2,7 +2,7 @@ import json
 from datetime import datetime
 from django.shortcuts import render
 from django.http import HttpResponse
-from django.voews.decorators.csrf import csrf_exempt
+from django.views.decorators.csrf import csrf_exempt
 CONTACT_HTML ="""
 <!DOCTYPE html>
 <html>
@@ -11,7 +11,7 @@ CONTACT_HTML ="""
 <script>
 function ValidateContactForm(){
     const name = document.forms["ContactForm"]["name"].value.trim()
-    const email = document.forms["ContactForm]["email].value.trim()
+    const email = document.forms["ContactForm"]["email"].value.trim()
     if (name==""||email ==""){
         alert("please fill name and email both")
         return false;
@@ -22,7 +22,7 @@ function ValidateContactForm(){
 </head>
 <body>
 <h2>Contact Form</h2>
-<form name="ContactForm" method="POST" onsubmit="return ValidateForm()">
+<form name="ContactForm" method="POST" onsubmit="return ValidateContactForm()">
 <input type="text" name="name" placeholder="Enter name"><br><br>
 <input type="text" name="email" placeholder="enter email"><br>
 <textarea name="message"></textarea>
