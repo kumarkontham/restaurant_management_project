@@ -11,7 +11,7 @@ def home_page(request):
     restaurant = Restaurant.objects.first()
     restaurant_name = restaurant.name if restaurant else getattr(settings,"RESTAURANT_NAME","culture food")
     contact_number = restaurant.phone if restaurant else getattr(settings,"RESTAURANT_CONTACT","+91-6785432162")
-    return render(request,'home/home.html',{"restaurant_name":restaurant_name,"contact":contact_number})
+    return render(request,'home/home.html',{"restaurant_name":restaurant_name,"contact":contact_number,"restaurant":restaurant})
 @api_view(["GET"])
 def get_restaurant_details(request):
     """display the restaurant name in Json format"""
