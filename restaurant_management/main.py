@@ -1,5 +1,46 @@
 import json
 from datetime import datetime
+from django.shortcuts import render
+from django.http import HttpResponse
+from django.voews.decorators.csrf import csrf_exempt
+CONTACT_HTML ="""
+<!DOCTYPE html>
+<html>
+<head>
+<title>Contact us</title>
+<script>
+function ValidateContactForm(){
+    const name = document.forms["ContactForm"]["name"].value.trim()
+    const email = document.forms["ContactForm]["email].value.trim()
+    if (name==""||email ==""){
+        alert("please fill name and email both")
+        return false;
+    return true;
+    }
+}
+</script>
+</head>
+<body>
+<h2>Contact Form</h2>
+<form name="ContactForm" method="POST" onsubmit="return ValidateForm()">
+<input type="text" name="name" placeholder="Enter name"><br><br>
+<input type="text" name="email" placeholder="enter email"><br>
+<textarea name="message"></textarea>
+<button type="submit">send</button>
+</form>
+</body>
+</html>
+"""
+@csrf_exempt
+def contact_view(request):
+    if request.method =="POST":
+        return HttpResponse("<h1>message received</h1>",content_type="text/html")
+    return HttpResponse(CONTACT_HTML,content_type="text/html")
+#urls.py 
+urlpatterns=[
+    path("contact/",main.contact_view,name="contact")
+]
+
 def error_handling():
     """in the  process of retriving the data occur any errors like database errors and object not found errors and any unexpected errors occurred display the messages in Json format"""
     try:
