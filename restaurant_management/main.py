@@ -10,15 +10,13 @@ CONTACT_HTML ="""
 <title>Contact us</title>
 <script>
 function ValidateContactForm(){
-    const name = document.forms["ContactForm"]["name"].value.trim()
-    const email = document.forms["ContactForm"]["email"].value.trim()
+    let name = document.forms["ContactForm"]["name"].value.trim()
+    let email = document.forms["ContactForm"]["email"].value.trim()
     if (name=="" || email ==""){
         window.alert("provide both name and email to proceed")
         return false;
     }
-    else{
     return true;
-    }
 }
 </script>
 </head>
