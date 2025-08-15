@@ -15,19 +15,19 @@ function ValidateContactForm(){
     if (name==""||email ==""){
         alert("please fill name and email both")
         return false;
+        }
     return true;
-    }
 }
 </script>
 </head>
 <body>
-<h2>Contact Form</h2>
-<form name="ContactForm" method="POST" onsubmit="return ValidateContactForm()">
-<input type="text" name="name" placeholder="Enter name"><br><br>
-<input type="text" name="email" placeholder="enter email"><br>
-<textarea name="message"></textarea>
-<button type="submit">send</button>
-</form>
+    <h2>Contact Form</h2>
+    <form name="ContactForm" method="POST" onsubmit="return ValidateContactForm()">
+        <input type="text" name="name" placeholder="Enter name"><br><br>
+        <input type="text" name="email" placeholder="enter email"><br>
+        <textarea name="message"></textarea>
+        <button type="submit">send</button>
+    </form>
 </body>
 </html>
 """
