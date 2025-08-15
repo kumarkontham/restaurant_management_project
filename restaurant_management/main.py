@@ -15,9 +15,9 @@ function ValidateContactForm(){
     if (name=="" || email ==""){
         alert("please fill name and email both")
         return false;
-        }
-    return true;
     }
+    return true;
+}
 </script>
 </head>
 <body>
