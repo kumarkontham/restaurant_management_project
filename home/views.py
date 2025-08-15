@@ -1,6 +1,7 @@
 from django.conf import settings
 from django.shortcuts import render
 from rest_framework.response import Response
+from django.http import JsonResponse
 from rest_framework.decorators import api_view
 from .models import Restaurant
 from .forms import ContactForm
@@ -52,7 +53,16 @@ def Menu_items(request):
 def reservation_view(request):
     place_holder = 'This page is under construction!. Reservation features will be available soon.'
     return render(request,'home/reservation.html',{"message":place_holder})
-
-    
-
-    
+def error_handling(request):
+    try:
+        restaurant = Restaurant.objects.first()
+        if restaurant is None:
+            return JsonResponse({"error":"No restaurant found in the database."},status=404)
+        else:
+            return JsonResponse({"name":restaurant.name})
+    except Restaurant.DoesNotExist:
+        return JsonResponse({"error":"requestes restaurant does not exist in the database"},status=404)
+    except DatabaseError:
+        return JsonResponse({"error":"A database error occurred!.please try again later."},status=500)
+    except Exception as e:
+        return JsonResponse({"error":f"An unexpected error occurred {str(e)}"},status=500)
