@@ -7,7 +7,13 @@
         <link rel="stylesheet" href="{% static 'reservation.css'%}"/>
         <script>
             function ValidateForm(){
-            const name = document.forms["Con"]
+            const name = document.forms["ContactForm"]["name"].value.trim()
+            const email = document.forms["ContactForm"]["email"].value.trim()
+            if (name == "" || email == ""){
+                alert("please fill both name and email")
+                return false;
+                }
+            return true;
             }
         </script>
     </head>
