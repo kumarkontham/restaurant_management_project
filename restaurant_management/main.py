@@ -24,6 +24,6 @@ def display_success_message():
 def retrieve_contact():
     return "+91-8976543245"
 if __name__ == "__main__":
-    print(generate_footer())
+    print(error_handling())
 
 
