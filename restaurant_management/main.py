@@ -28,6 +28,6 @@ if __name__ == "__main__":
     try:
         print(error_handling())
     except Exception as e:
-        print(json.dumps({"status"=500,"error":str(e)}))
+        print(json.dumps({"status":500,"error":str(e)}))
 
 
