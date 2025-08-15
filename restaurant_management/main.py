@@ -17,7 +17,7 @@ function ValidateContactForm(){
         return false;
         }
     return true;
-}
+    }
 </script>
 </head>
 <body>
