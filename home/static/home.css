@@ -7,8 +7,8 @@ body{
     line-height: 1.6;
 }
 header{
-    position: sticky;
-    background-color: #f8f8f8;
+    background-color: #0077cc;
+    color: #fff;
     padding: 1rem;
     text-align: center;
 }
@@ -17,22 +17,16 @@ header{
     margin: 2rem auto;
     padding: 0 1rem;
 }
-nav{
-    position: relative;
+.footer{
+    background-color: rgb(103, 106, 113);
+    position: sticky;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
 }
-nav a{
-    text-decoration: none;
-    background-color: black;
-    color: #ffffff;
+.timings{
+    color: rgb(22, 22, 22);
+    background-color: rgb(255, 255, 255);
+    text-align: center;
+    
 }
-footer{
-    width: 100%;
-    background-color: rgb(19, 19, 19);
-    color: #ffffff;
-}
-
-
-
