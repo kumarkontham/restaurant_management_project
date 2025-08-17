@@ -3,7 +3,7 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>Restaurant name</title>
+        <title>{%block title}Restaurant name{%endblock%}</title>
         <link rel="stylesheet" href="{% static 'home.css' %}">
     </head>
     <body>
@@ -14,7 +14,10 @@
             <li><a style="color:#2c3e50;margin:10px;" href="/">Home</a></li>
             </nav>
         </header>
-        {%%}
+        {% block content%}
+        <main>
+        </main>
+        {% endblock %}
         <footer class="footer">
             <span>Opening Hours:
             <small class="timings">
