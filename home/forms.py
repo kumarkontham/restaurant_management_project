@@ -4,4 +4,5 @@ class ContactForm(forms.ModelForm):
     email = forms.EmailField(required=True,label="Your email")
     message = forms.CharField(width=forms.Textarea,required = True, label ="Your message")
 class FeedbackForm(forms.ModelForm):
+    model = Feedback
     
