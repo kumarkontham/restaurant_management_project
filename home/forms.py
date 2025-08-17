@@ -5,5 +5,8 @@ class ContactForm(forms.ModelForm):
     message = forms.CharField(width=forms.Textarea,required = True, label ="Your message")
 class FeedbackForm(forms.ModelForm):
     model = Feedback
-    fields = 
+    fields = ["comment"]
+    widgets = {
+        "comment":forms.Textarea(attrs={"rows":4,"place_holder":"enter your Feedback: "})
+    }
     
