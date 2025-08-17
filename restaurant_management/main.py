@@ -1,10 +1,8 @@
 from django.db import models
 from django.http import HttpResponse
 from django import forms
-from django.shortcuts import render , redirect
+from django.shortcuts import render,redirect
 from django.urls import path
-from .views import views 
-from .models import Feedback
 COPYRIGHT="\u00A9 | 2025 All Rights Reserved"
 OPENING_HOURS = "Mon-Fri:9:00am-9:00pm,Sat-Sun:10:00am-10:00pm"
 def home_page_rendering(title:str,body:str):
