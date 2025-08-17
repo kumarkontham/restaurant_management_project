@@ -26,7 +26,6 @@ def render_footer(title:str,body:str):
     </html>
     """
     return HttpResponse(html)
-#views.py
 def home_view(request):
     context="<h2>welcome to my  restaurant</h2><p>Enjoy the day!with our food.</p>"
     return render_footer("Home",context)
