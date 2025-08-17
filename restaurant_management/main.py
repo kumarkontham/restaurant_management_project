@@ -27,7 +27,11 @@ def home_page_rendering(title:str,body:str):
     """
     return HttpResponse(html)
 def home_view(request):
-    context="<h2>welcome to my restaurant</h2><p>Enjoy the day!with our food.</p>"
+    context="""<h2>welcome to my restaurant</h2><p>Enjoy the day!with our food.</p>
+    <form method="get" action="#" class="search-bar">
+    <input type="text" name="q" placeholder="search items">
+    <button type="submit">Search</button>
+    </form>"""
     return home_page_rendering("Home",context)
 #models.py
 class Feedback(models.Model):
