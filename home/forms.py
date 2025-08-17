@@ -5,4 +5,5 @@ class ContactForm(forms.ModelForm):
     message = forms.CharField(width=forms.Textarea,required = True, label ="Your message")
 class FeedbackForm(forms.ModelForm):
     model = Feedback
+    fields = 
     
