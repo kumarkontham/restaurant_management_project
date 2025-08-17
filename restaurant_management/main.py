@@ -1,7 +1,7 @@
 from django.db import models
+from django.http import HttpResponse
 from django import forms
 from django.shortcuts import render , redirect
-from django.http import HttpResponse
 from django.urls import path
 from .views import views 
 from .models import Feedback
@@ -20,12 +20,13 @@ def render_footer(title:str,body:str):
     {body}
     </main>
     <footer>
-    <small>Openings hours:{OPENING_HOURs}</small>
+    <small>Openings hours:{OPENING_HOURS}</small>
     </footer>
     </body>
     </html>
     """
     return HttpResponse(html)
+#views.py
 def home_view(request):
     context="<h2>welcome to my  restaurant</h2><p>Enjoy the day!with our food.</p>"
     return render_footer("Home",context)
