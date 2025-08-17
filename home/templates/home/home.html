@@ -1,38 +1,26 @@
-{%load static%}
+{% load static %}
+<!DOCTYPE html>
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>{%block title%}Restaurant name{% endblock %}</title>
-        <link rel="stylesheet" href="{% static 'home.css' %}"/>
-        <link rel="stylesheet" href="{% static 'reservation.css'%}"/>
-        <script>
-            function ValidateForm(){
-            const name = document.forms["ContactForm"]["name"].value.trim()
-            const email = document.forms["ContactForm"]["email"].value.trim()
-            if (name == "" || email == ""){
-                alert("please fill both name and email")
-                return false;
-                }
-            return true;
-            }
-        </script>
+        <title>Restaurant name</title>
+        <link rel="stylesheet" href="{% static 'home.css' %}">
     </head>
     <body>
         <header>
-            <img style="display:block;margin:none;height:auto;" src="{{restaurant.logo.url}}"  alt="logo">
-            <h5>Welcome to my {{restaurant_name}} Enjoy our food!</h5>
-            <nav>
-                <a href="/">Home</a>
-                <a href="/about/">AboutUs</a>
-            </nav>
+            Welcome to my {{restaurant_name}}
         </header>
-        <main>
-            {% block content %}
-            {% endblock %}
-        </main>
-        <footer>
-            <p> &copy; {{curr_year}} All Rights Reserved
-            <li>Contact:<b>{{contact}}</b></li>
+        <div class="container">
+            <ul>
+            <li><a class="about" href="/about/" style="text-decoration:none;color:black;">AboutUs</a></li>
+            <li><a style="color:#2c3e50;margin:10px;" href="/">Home</a></li>
+            </ul>
+        </div>
+        <footer class="footer">
+            <span>Opening Hours:
+            <small class="timings">
+                Mon - Fri:11:00am ,Sat-Sun:10:am-10pm
+            </small>
         </footer>
     </body>
 </html>
