@@ -1,5 +1,5 @@
 from django.conf import settings
-from django.http import JsonResponse
+from django.http import JsonResponse,HttpResponse
 from django.shortcuts import render,redirect
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
@@ -24,6 +24,9 @@ def feedback_view(request):
             return redirect('feedback_thanks_view')
         else:
             form = FeedbackForm()
+        return render(request,"home/feedback.html",{"form":form})
+def feedback_thanks_view(request):
+    return HttpResponse("<h2>Thank you for submitting your response</h2>")
 
 
     
