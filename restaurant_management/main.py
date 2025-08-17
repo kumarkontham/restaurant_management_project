@@ -5,7 +5,6 @@ from django.http import HttpResponse
 from django.urls import path
 from .views import views 
 from .models import Feedback
-
 #models.py
 class Feedback(models.Model):
     comment = models.TextField()
@@ -35,11 +34,8 @@ def feed_back_completed(request):
 #urls.py
 urlpatterns =[
     path("feedback/",views.feedback_view,name="feedback_form"),
-    path("feedback/completed/",views.feed_back_completed,name="feedback_completed"),
 ]
-
 def display_success_message():
-    return "basic css styles added  successfully for the home page"
-    
+    return "basic css styles added  successfully for the home page"  
 if __name__ == "__main__":
     print(display_success_message())
