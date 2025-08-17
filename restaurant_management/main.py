@@ -34,7 +34,7 @@ def feed_back_completed(request):
     return HttpResponse("<h2>Thank you for your response.</h2>")
 #urls.py
 urlpatterns =[
-    path("feedback/",views.feedback_view,name="feedback"),
+    path("feedback/",views.feedback_view,name="feedback_form"),
     path("feedback/completed/",views.feed_back_completed,name="feedback_completed"),
 ]
 
