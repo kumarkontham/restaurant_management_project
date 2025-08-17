@@ -5,6 +5,30 @@ from django.http import HttpResponse
 from django.urls import path
 from .views import views 
 from .models import Feedback
+OPENING_HOURS = "Mon-Fri:9:00am-9:00pm,Sat-Sun:10:00am-10:00pm"
+def render_footer(title:str,body:str):
+    html=f"""<!DOCTYPE html>
+    <html lang="en">
+    <head>
+    <title>{title}</title>
+    </head>
+    <body>
+    <header>
+    <h2>Welcome to my Restaurant</h2>
+    </header>
+    <main>
+    {body}
+    </main>
+    <footer>
+    <small>Openings hours:{OPENING_HOURs}</small>
+    </footer>
+    </body>
+    </html>
+    """
+    return HttpResponse(html)
+def home_view(request):
+    context="<h2>welcome to my  restaurant</h2><p>Enjoy the day!with our food.</p>"
+    return render_footer("Home",context)
 #models.py
 class Feedback(models.Model):
     comment = models.TextField()
