@@ -1,13 +1,15 @@
-{% extends "home.html" %}
-        <title>{%block title%}Menu items{%endblock%}</title>
-    {%block content %}
-    <div>
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Menu items</title>
+    </head>
+    <body>
         <ul>
             {%for i in menu_items%}
             <li>
-                <b>{{i.name}}</b><span>{{i.price}}</span>
+                <a href="{{i.url}}">{{i.mname}}</a>
             </li>
             {%endfor%}
         </ul>
-    </div>
-    {% endblock %}
+    </body>
+</html>
