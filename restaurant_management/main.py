@@ -3,6 +3,8 @@ from django import forms
 from django.shortcuts import render , redirect
 from django.http import HttpResponse
 from django.urls import path
+from .views import views 
+from .models import Feedback
 
 #models.py
 class Feedback(models.Model):
@@ -16,7 +18,7 @@ class FeedbackForm(forms.ModelForm):
         model = Feedback
         fields = ["comment"]
         widgets = {
-            "comment": forms.Textarea(attrs={"rows":4,"place_holder":"Enter your feedback."})
+            "comment": forms.Textarea(attrs={"rows":4,"placeholder":"Enter your feedback."})
         }
 #views.py
 def feedback_view(request):
@@ -33,7 +35,7 @@ def feed_back_completed(request):
 #urls.py
 urlpatterns =[
     path("feedback/",views.feedback_view,name="feedback"),
-    path("feedback/completed",views.feed_back_completed,name="feedback_completed"),
+    path("feedback/completed/",views.feed_back_completed,name="feedback_completed"),
 ]
 
 def display_success_message():
