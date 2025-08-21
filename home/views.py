@@ -3,7 +3,9 @@ from django.http import JsonResponse,HttpResponse
 from django.shortcuts import render,redirect
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
+from rest_framework.views import APIView
 from .models import Restaurant,MenuItems
+from rest_framework import status
 def home_page(request):
     """display restaurantname on the home page
     fetch from the database if available otherwise get the name from settings file
@@ -27,6 +29,11 @@ def feedback_view(request):
         return render(request,"home/feedback.html",{"form":form})
 def feedback_thanks_view(request):
     return HttpResponse("<h2>Thank you for submitting your response</h2>")
+class MenuAPIView(APIView):
+    def get(self,request):
+        menu = [{"name":"chicken biryani","description":"fresh chicken in used self made masala","price":300},{"name":"SambarRice","description":"home style preparation","price":199},{"name":"tiffin","description":"all types of  tiffins","price":45}]
+        return Response(menu,status=status.HTTP_200_OK)
+
 
 
     
