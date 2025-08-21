@@ -1,8 +1,11 @@
 from django.db import models
 from django.http import HttpResponse
+from rest_framework import status
+from rest_framework.response import Response
 from django import forms
 from django.shortcuts import render,redirect
 from django.urls import path
+from rest_framework.views import APIView
 COPYRIGHT="\u00A9 | 2025 All Rights Reserved"
 OPENING_HOURS = "Mon-Fri:9:00am-9:00pm,Sat-Sun:10:00am-10:00pm"
 def home_page_rendering(title:str,body:str):
@@ -61,9 +64,17 @@ def feedback_view(request):
     return render(request,'home/feedback.html',{"form":form})
 def feed_back_completed(request):
     return HttpResponse("<h2>Thank you for your response.</h2>")
+class MenuAPIView(APIView):
+    def get(self,request):
+        menu = [{"name":"chicken biryani","description":"fresh chicken with made up of with self made ingredients","price":300},
+        {"name":"smabarrice","description":"home style food","price":99},
+        {"name":"tiffins","description":"all tiffins avalable","price":45},
+        ]
+        return Response(menu,status=status.HTTP_200_OK)
 #urls.py
 urlpatterns =[
     path("feedback/",views.feedback_view,name="feedback_form"),
+    path("menu/",views.MenuAPIView.as_view(),name="menu_items")
 ]
 def display_success_message():
     return "basic css styles added  successfully for the home page"  
