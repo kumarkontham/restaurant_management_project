@@ -46,11 +46,15 @@ class Feedback(models.Model):
         return f"{self.id}-{self.comment}"
 #models.py
 class Order(models.Model):
+    STATUS_PENDING="pending"
+    STATUS_COMPLETED="completed"
+    STATUS_IN_PROGRESS="in_progress"
+    STATUS_CANCELED = "canceled"
     STATUS_CHOICES =[
     (STATUS_PENDING,"pending"),
     (STATUS_IN_PROGRESS,"in_progress"),
     (STATUS_COMPLETED,"completed"),
-    (STATUS_CANCELED,"cancled"),
+    (STATUS_CANCELED,"canceled"),
     ]
     customer = models.ForeignKey(User,on_delete=CASCADE,related_name='orders')
     total_amount = models.DecimalField(max_digits=10,decimal_places=2,default=0)
