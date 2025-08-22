@@ -60,7 +60,7 @@ class Order(models.Model):
     total_amount = models.DecimalField(max_digits=10,decimal_places=2,default=0)
     status = models.CharField(max_length=20,choices=STATUS_CHOICES,default="pending")
     def __str__(self):
-        return f"order {self.id} by {self.customer}"
+        return f"order #{self.id} by {self.customer}"
 #forms.py
 class FeedbackForm(forms.ModelForm):
     class Meta:
