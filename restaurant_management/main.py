@@ -45,7 +45,7 @@ class Feedback(models.Model):
     def __str__(self):
         return f"{self.id}-{self.comment}"
 #models.py
-class Order(models.Model):
+class Orders(models.Model):
     STATUS_PENDING="pending"
     STATUS_COMPLETED="completed"
     STATUS_IN_PROGRESS="in_progress"
@@ -61,7 +61,7 @@ class Order(models.Model):
     status = models.CharField(max_length=20,choices=STATUS_CHOICES,default="pending")
     def __str__(self):
         return f"order #{self.id} by {self.customer}"
-class Menu(models.Model):
+class Menu_items(models.Model):
     name = models.CharField(max_length=50)
     description = models.TextField()
     price = models.DecimalField(max_digits=10,decimal_places=2,default=0)
