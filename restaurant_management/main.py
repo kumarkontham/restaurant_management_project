@@ -7,6 +7,8 @@ from django.contrib.auth.models import User
 from django.shortcuts import render,redirect
 from django.urls import path
 from rest_framework.views import APIView
+from rest_framework import serializers
+from django.urls import reverse
 COPYRIGHT="\u00A9 | 2025 All Rights Reserved"
 OPENING_HOURS = "Mon-Fri:9:00am-9:00pm,Sat-Sun:10:00am-10:00pm"
 def home_page_rendering(title:str,body:str):
@@ -74,6 +76,11 @@ class User_profile(models.Model):
     Mobile_number = models.CharField(max_length=15,blank=True)
     def __str__(self):
         return self.user.username
+#serializers.py
+class Menu_items_serializer(serializers.ModelSerializer):
+    class Meta:
+        model = Menu_items
+        fields="__all__"
 #forms.py
 class FeedbackForm(forms.ModelForm):
     class Meta:
@@ -101,10 +108,26 @@ class MenuAPIView(APIView):
         {"name":"tiffins","description":"all tiffins avalable","price":45},
         ]
         return Response(menu,status=status.HTTP_200_OK)
+class Menu_itemsAPI_view(APIView):
+    def get(self,request,format=None):
+        items = Menu_items.objects.all()
+        serializer = Menu_items_serializer(items,many=True)
+        return Response(serializer.data,status=status.HTTP_200_OK)
+def menu_view(request):
+    api_url = request.build_abolute_url(reverse('menu_api'))
+    try:
+        resp = requests.get(api_url,timeout=5)
+        resp.raise_for_status()
+        menu_items = resp.json()
+    except requests.RequestException:
+        menu_items=[]
+    return render(request,"home/home.html",{"menu_items":menu_items})
+
 #urls.py
 urlpatterns =[
     path("feedback/",views.feedback_view,name="feedback_form"),
     path("menu/",views.MenuAPIView.as_view(),name="menu_items"),
+    path("menu_items/",Menu_itemsAPI_view.as_view(),name="menu_api")
 ]
 def display_success_message():
     return "basic css styles added  successfully for the home page"  
