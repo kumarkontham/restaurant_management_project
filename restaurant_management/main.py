@@ -104,7 +104,7 @@ class MenuAPIView(APIView):
 #urls.py
 urlpatterns =[
     path("feedback/",views.feedback_view,name="feedback_form"),
-    path("menu/",views.MenuAPIView.as_view(),name="menu_items")
+    path("menu/",views.MenuAPIView.as_view(),name="menu_items"),
 ]
 def display_success_message():
     return "basic css styles added  successfully for the home page"  
