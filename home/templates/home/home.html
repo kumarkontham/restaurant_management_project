@@ -16,6 +16,15 @@
         </header>
         {% block content%}
         <main>
+            <ul>
+            {%for item in menu_items%}
+            <li>
+                <span>{{item.name}}</span>
+                <span>{{item.description}}</span>
+                <span>{{item.price}}</span>
+            </li>
+            {%endfor%}
+            </ul>
         </main>
         {% endblock %}
         <footer class="footer">
