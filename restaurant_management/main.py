@@ -56,8 +56,6 @@ def menu_view(request):
 class Restaurant(models.Model):
     name=models.CharField(max_length=30,blank=True,null=True)
     address = models.CharField(max_length=100,blank=True,null=True)
-    map_src=None
-    maps_link = f"https://www.google.com/maps/search/?api=1&query={quote_plus(address)}" if address else None
     def __str__(self):
         return f"{self.name}" 
 class Menuitem(models.Model):
