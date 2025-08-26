@@ -38,6 +38,9 @@ def home_view(request):
     restaurant_name=restaurant.restaurant_name if restaurant else settings.RESTAURANT_NAME 
     context={"restaurant_name":restaurant_name}
     return render(request,"home/home.html",context)
+def menu_view(request):
+    menu_items = Menuitem.objects.all()
+    return render(request,"home/menu.html")
 # class Feedback(models.Model):
 #     comment = models.TextField()
 #     created_at = models.DateTimeField(auto_now_add=True)
