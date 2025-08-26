@@ -44,11 +44,14 @@ def home_view(request):
 #     created_at = models.DateTimeField(auto_now_add=True)
 #     def __str__(self):
 #         return f"{self.id}-{self.comment}"
+
 #models.py
 class Restaurant(models.Model):
     restaurant_name = models.CharField(max_length=30)
     def __str__(self):
         return f"{self.restaurant_name}"
+
+        
 # class Orders(models.Model):
 #     STATUS_PENDING="pending"
 #     STATUS_COMPLETED="completed"
