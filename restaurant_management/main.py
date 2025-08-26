@@ -141,7 +141,7 @@ urlpatterns =[
     path("menu/",views.menu_view,name="menu_items"),
     # path("feedback/",views.feedback_view,name="feedback_form"),
     # path("menu/",views.MenuAPIView.as_view(),name="menu_items"),
-    # path("menu_items/",Menu_itemsAPI_view.as_view(),name="menu_api")
+    # path("menu_items/",Menu_itemsAPI_view.as_view(),name="menu_api"),
 ]
 def display_success_message():
     return "basic css styles added  successfully for the home page"  
