@@ -25,7 +25,9 @@
             </li>
             {%endfor%}
             </ul>
-            <iframe src="q={{restaurant_address}}"></iframe>
+            <div class="map-container">
+            <iframe loading="lazy" allowfullscreenreferrerpolicy="no-referrer-when-downgrade" src="q={{restaurant_address}}"></iframe>
+            </div>
         </main>
         {% endblock %}
         <footer class="footer">
