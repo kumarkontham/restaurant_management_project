@@ -1,3 +1,4 @@
+from urllib.parse import quote_plus
 from django.db import models
 from django.http import HttpResponse
 from rest_framework import status
@@ -39,7 +40,9 @@ def home_view(request):
     restaurant=Restaurant.objects.first()
     restaurant_name=restaurant.restaurant_name if restaurant else settings.RESTAURANT_NAME 
     address = restaurant.address if restaurant else settings.RESTAURANT_ADDRESS
-    context={"restaurant_name":restaurant_name,"restaurant_address":address,}
+    map_src=None
+    maps_link = f"https://www.google.com/maps/search/?api=1&query={quote_plus(address)}"if address else None
+    context={"restaurant_name":restaurant_name,"restaurant_address":address,"maps_link":maps_link}
     return render(request,"home/home.html",context)
 def menu_view(request):
     menu_items = Menuitem.objects.all()
@@ -53,6 +56,8 @@ def menu_view(request):
 class Restaurant(models.Model):
     name=models.CharField(max_length=30,blank=True,null=True)
     address = models.CharField(max_length=100,blank=True,null=True)
+    map_src=None
+    maps_link = f"https://www.google.com/maps/search/?api=1&query={quote_plus(address)}" if address else None
     def __str__(self):
         return f"{self.name}" 
 class Menuitem(models.Model):
