@@ -9,6 +9,8 @@ from django.urls import path
 from rest_framework.views import APIView
 from rest_framework import serializers
 from django.urls import reverse
+#settings.py
+RESTAURANT_ADDRESS = "1/34 road no:12 hyderabad area"
 # COPYRIGHT="\u00A9 | 2025 All Rights Reserved"
 # OPENING_HOURS = "Mon-Fri:9:00am-9:00pm,Sat-Sun:10:00am-10:00pm"
 # def home_page_rendering(title:str,body:str):
@@ -36,7 +38,8 @@ from django.urls import reverse
 def home_view(request):
     restaurant=Restaurant.objects.first()
     restaurant_name=restaurant.restaurant_name if restaurant else settings.RESTAURANT_NAME 
-    context={"restaurant_name":restaurant_name}
+    address = restaurant.address if restaurant else settings.RESTAURANT_ADDRESS
+    context={"restaurant_name":restaurant_name,"restaurant_address":address,}
     return render(request,"home/home.html",context)
 def menu_view(request):
     menu_items = Menuitem.objects.all()
@@ -49,6 +52,7 @@ def menu_view(request):
 #models.py
 class Restaurant(models.Model):
     name=models.CharField(max_length=30,blank=True,null=True)
+    address = models.CharField(max_length=100,blank=True,null=True)
     def __str__(self):
         return f"{self.name}" 
 class Menuitem(models.Model):
