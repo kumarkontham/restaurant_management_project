@@ -47,7 +47,16 @@ def home_view(request):
 class Restaurant(models.Model):
     restaurant_name = models.CharField(max_length=30,blank=True,null=True)
     def __str__(self):
-        return f"{self.restaurant_name}"    
+        return f"{self.restaurant_name}" 
+class Menu_items(models.Model):
+    item_name = models.CharField(max_length=40)
+    description = models.TextField()
+    price = models.DecimalField(max_digits=5,decimal_places=2)
+    def __str__(self):
+        return self.item_name
+"""Run the commands for update data in the database 
+python manage.py makemigrations
+python manage.py migrate"""  
 # class Orders(models.Model):
 #     STATUS_PENDING="pending"
 #     STATUS_COMPLETED="completed"
