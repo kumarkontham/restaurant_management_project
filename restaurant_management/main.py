@@ -47,7 +47,7 @@ def home_view(request):
 
 #models.py
 class Restaurant(models.Model):
-    restaurant_name = models.CharField(max_length=30)
+    restaurant_name = models.CharField(max_length=30,blank=True,null=True)
     def __str__(self):
         return f"{self.restaurant_name}"
 
