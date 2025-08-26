@@ -33,14 +33,10 @@ def home_page_rendering(title:str,body:str):
     """
     return HttpResponse(html)
 def home_view(request):
-    context="""
-    <h2>welcome to my restaurant</h2><p>Enjoy the day!with our food.</p>
-    <form method="get" action="#" class="search-bar">
-    <input type="text" name="q" placeholder="search items">
-    <button type="submit">Search</button>
-    </form>
-    """
-    return home_page_rendering("Home",context)
+    restaurant = Restaurant.objects.first()
+    restaurant_name = restaurant.restaurant_name if restaurant else settings.RESTAURANT_NAME 
+    context = {"restaurant_name":restaurant_name}
+    return render(request,"home/home.html",context)
 #models.py
 class Feedback(models.Model):
     comment = models.TextField()
@@ -48,6 +44,10 @@ class Feedback(models.Model):
     def __str__(self):
         return f"{self.id}-{self.comment}"
 #models.py
+class Restaurant(models.Model):
+    restaurant_name = models.CharField(max_length=30)
+    def __str__(self):
+        return f"{self.restaurant_name}"
 class Orders(models.Model):
     STATUS_PENDING="pending"
     STATUS_COMPLETED="completed"
