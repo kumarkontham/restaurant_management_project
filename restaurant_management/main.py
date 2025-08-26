@@ -38,20 +38,16 @@ def home_view(request):
     restaurant_name = restaurant.restaurant_name if restaurant else settings.RESTAURANT_NAME 
     context = {"restaurant_name":restaurant_name}
     return render(request,"home/home.html",context)
-#models.py
 # class Feedback(models.Model):
 #     comment = models.TextField()
 #     created_at = models.DateTimeField(auto_now_add=True)
 #     def __str__(self):
 #         return f"{self.id}-{self.comment}"
-
 #models.py
 class Restaurant(models.Model):
     restaurant_name = models.CharField(max_length=30,blank=True,null=True)
     def __str__(self):
-        return f"{self.restaurant_name}"
-
-        
+        return f"{self.restaurant_name}"    
 # class Orders(models.Model):
 #     STATUS_PENDING="pending"
 #     STATUS_COMPLETED="completed"
