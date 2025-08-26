@@ -138,6 +138,7 @@ python manage.py migrate"""
 #urls.py
 urlpatterns =[
     path("",views.home_view,name = "home_page"),
+    path("menu/",views.menu_view,name="menu_items")
     # path("feedback/",views.feedback_view,name="feedback_form"),
     # path("menu/",views.MenuAPIView.as_view(),name="menu_items"),
     # path("menu_items/",Menu_itemsAPI_view.as_view(),name="menu_api")
