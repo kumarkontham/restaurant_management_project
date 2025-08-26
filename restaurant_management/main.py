@@ -45,10 +45,10 @@ def home_view(request):
 #         return f"{self.id}-{self.comment}"
 #models.py
 class Restaurant(models.Model):
-    restaurant_name = models.CharField(max_length=30,blank=True,null=True)
+    name = models.CharField(max_length=30,blank=True,null=True)
     def __str__(self):
         return f"{self.restaurant_name}" 
-class Menu_items(models.Model):
+class Menuitem(models.Model):
     item_name = models.CharField(max_length=40)
     description = models.TextField()
     price = models.DecimalField(max_digits=5,decimal_places=2)
