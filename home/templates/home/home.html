@@ -28,6 +28,11 @@
             <div class="map-container">
             <iframe loading="lazy" allowfullscreenreferrerpolicy="no-referrer-when-downgrade" src="q={{restaurant_address}}"></iframe>
             </div>
+            <form method="POST">
+                {%csrf_token%}
+                {{form.as_p}}
+                <button type="submit">submit</button>
+            </form>
         </main>
         {% endblock %}
         <footer class="footer">
