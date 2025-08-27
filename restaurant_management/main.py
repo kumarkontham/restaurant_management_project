@@ -37,12 +37,19 @@ RESTAURANT_ADDRESS = "1/34 road no:12 hyderabad area"
 #     return HttpResponse(html)
 #views.py
 def home_view(request):
+    if request.method=="POST":
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return render(request,"home/contact_success.html")
+        else:
+            form = ContactForm()
     restaurant=Restaurant.objects.first()
     restaurant_name=restaurant.restaurant_name if restaurant else settings.RESTAURANT_NAME 
     address = restaurant.address if restaurant else settings.RESTAURANT_ADDRESS
     map_src=None
     maps_link = f"https://www.google.com/maps/search/?api=1&query={quote_plus(address)}"if address else None
-    context={"restaurant_name":restaurant_name,"restaurant_address":address,"maps_link":maps_link}
+    context={"restaurant_name":restaurant_name,"restaurant_address":address,"maps_link":maps_link,"form":form}
     return render(request,"home/home.html",context)
 def menu_view(request):
     menu_items = Menuitem.objects.all()
@@ -64,6 +71,13 @@ class Menuitem(models.Model):
     price = models.DecimalField(max_digits=5,decimal_places=2)
     def __str__(self):
         return self.item_name
+class Contact(models.Model):
+    name=models.CharField(max_length=30)
+    email=models.EmailField(unique=True)
+    submitted_at = models.DateTimeField(auto_now_add=True)
+    def __str__(self):
+        return f"{self.name}-{self.email}"
+
 """Run the commands for update data in the database 
 python manage.py makemigrations
 python manage.py migrate"""  
@@ -101,6 +115,10 @@ python manage.py migrate"""
 #         model = Menu_items
 #         fields="__all__"
 #forms.py
+class ContactForm(forms.ModelForm):
+    class Meta:
+        model=Contact
+        fields=["name","email"]
 # class FeedbackForm(forms.ModelForm):
 #     class Meta:
 #         model = Feedback
