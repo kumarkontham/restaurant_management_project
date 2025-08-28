@@ -78,13 +78,12 @@ class Contact(models.Model):
     def __str__(self):
         return f"{self.name}-{self.email}"
 class Location(models.Model):
-    address = models.TextField()
+    address = models.CharField(max_length=255)
     city = models.CharField(max_length=50)
     state = models.CharField(max_length=30)
     zipcode = models.CharField(max_length=6)
     def __str__(self):
         return f"{self.address}"
-
 """Run the commands for update data in the database 
 python manage.py makemigrations
 python manage.py migrate"""  
