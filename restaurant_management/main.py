@@ -44,12 +44,13 @@ def home_view(request):
             return render(request,"home/contact_success.html")
         else:
             form = ContactForm()
+    location = Location.objects.first()
     restaurant=Restaurant.objects.first()
     restaurant_name=restaurant.restaurant_name if restaurant else settings.RESTAURANT_NAME 
     address = restaurant.address if restaurant else settings.RESTAURANT_ADDRESS
     map_src=None
     maps_link = f"https://www.google.com/maps/search/?api=1&query={quote_plus(address)}"if address else None
-    context={"restaurant_name":restaurant_name,"restaurant_address":address,"maps_link":maps_link,"form":form}
+    context={"restaurant_name":restaurant_name,"restaurant_address":address,"maps_link":maps_link,"form":form,"location":location}
     return render(request,"home/home.html",context)
 def menu_view(request):
     menu_items = Menuitem.objects.all()
