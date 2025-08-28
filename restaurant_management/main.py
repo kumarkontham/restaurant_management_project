@@ -77,6 +77,13 @@ class Contact(models.Model):
     submitted_at = models.DateTimeField(auto_now_add=True)
     def __str__(self):
         return f"{self.name}-{self.email}"
+class Location(models.Model):
+    address = models.TextField()
+    city = models.CharField(max_length=50)
+    state = models.CharField(max_length=30)
+    zipcode = models.CharField(max_length=6)
+    def __str__(self):
+        return f"{self.address}"
 
 """Run the commands for update data in the database 
 python manage.py makemigrations
