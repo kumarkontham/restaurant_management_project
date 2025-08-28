@@ -70,6 +70,8 @@ class Menuitem(models.Model):
     item_name = models.CharField(max_length=40)
     description = models.TextField()
     price = models.DecimalField(max_digits=5,decimal_places=2)
+    #before adding images implement the media url and media dir in settings.py which is most important because in django images are stored in media folder
+    image = models.ImageField(upload_to = 'menu_images/',blank=True,null=True)
     def __str__(self):
         return self.item_name
 class Contact(models.Model):
