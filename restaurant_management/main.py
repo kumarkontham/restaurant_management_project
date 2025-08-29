@@ -50,7 +50,7 @@ def home_view(request):
     address = restaurant.address if restaurant else settings.RESTAURANT_ADDRESS
     map_src=None
     maps_link = f"https://www.google.com/maps/search/?api=1&query={quote_plus(address)}"if address else None
-    context={"restaurant_name":restaurant_name,"restaurant_address":address,"maps_link":maps_link,"form":form,"location":location}
+    context = {"restaurant_name":restaurant_name,"restaurant_address":address,"maps_link":maps_link,"form":form,"location":location}
     return render(request,"home/home.html",context)
 def menu_view(request):
     menu_items = Menuitem.objects.all()
