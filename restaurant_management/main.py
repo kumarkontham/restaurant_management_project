@@ -52,13 +52,6 @@ def home_view(request):
     maps_link = f"https://www.google.com/maps/search/?api=1&query={quote_plus(address)}"if address else None
     context={"restaurant_name":restaurant_name,"restaurant_address":address,"maps_link":maps_link,"form":form,"location":location}
     return render(request,"home/home.html",context)
-def contact_view(request):
-    if request.method == "POST":
-        form = ContactForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return render(request,"home/contact")
-
 def menu_view(request):
     menu_items = Menuitem.objects.all()
     return render(request,"home/menu.html")
