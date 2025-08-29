@@ -54,7 +54,8 @@ def home_view(request):
     return render(request,"home/home.html",context)
 def menu_view(request):
     menu_items = Menuitem.objects.all()
-    return render(request,"home/menu.html")
+    context = {"menu_items":menu_items}
+    return render(request,"home/menu.html",context)
 # class Feedback(models.Model):
 #     comment = models.TextField()
 #     created_at = models.DateTimeField(auto_now_add=True)
