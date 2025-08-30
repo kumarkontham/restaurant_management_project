@@ -78,6 +78,7 @@ def menu_view(request):
 class Restaurant(models.Model):
     name=models.CharField(max_length=30,blank=True,null=True)
     address = models.CharField(max_length=100,blank=True,null=True)
+    opening_hours = models.JsonField(default=dict)
     def __str__(self):
         return f"{self.name}" 
 class Menuitem(models.Model):
