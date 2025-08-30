@@ -45,6 +45,8 @@ def home_view(request):
     if request.method=="POST":
         form = ContactForm(request.POST)
         if form.is_valid():
+            name =form.cleaned_data["name"]
+            
             form.save()
             return render(request,"home/contact_success.html")
         else:
