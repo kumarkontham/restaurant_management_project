@@ -37,6 +37,10 @@ RESTAURANT_ADDRESS = "1/34 road no:12 hyderabad area"
 #     return HttpResponse(html)
 #views.py
 def home_view(request):
+    if request.method =="GET":
+        query = request.GET.get('q')
+        if query:
+            search_items=Menu_items.objects.filter(name__contains=query)
     if request.method=="POST":
         form = ContactForm(request.POST)
         if form.is_valid():
