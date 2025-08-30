@@ -84,7 +84,7 @@ class Menuitem(models.Model):
     item_name = models.CharField(max_length=40)
     description = models.TextField()
     price = models.DecimalField(max_digits=5,decimal_places=2)
-    image = models.ImageField(upload_to = 'menu_images/',blank=True,null=True)
+    image = models.ImageField(upload_to = 'menu_items/',blank=True,null=True)
     def __str__(self):
         return self.item_name
 class Contact(models.Model):
