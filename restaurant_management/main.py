@@ -46,7 +46,13 @@ def home_view(request):
         form = ContactForm(request.POST)
         if form.is_valid():
             name =form.cleaned_data["name"]
-            
+            email =form.cleaned_data["email"]
+            subject= f"new contact form from {name}"
+            send_mail(
+                subject,
+                settings.DEFAULT.FROM_EMAIL,
+                [settings.EMAIL_HOST_USER],
+            )
             form.save()
             return render(request,"home/contact_success.html")
         else:
