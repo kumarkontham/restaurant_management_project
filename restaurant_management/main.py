@@ -10,6 +10,7 @@ from django.urls import path
 from rest_framework.views import APIView
 from rest_framework import serializers
 from django.urls import reverse
+from django.core.mail import send_mail
 #settings.py
 RESTAURANT_ADDRESS = "1/34 road no:12 hyderabad area"
 # COPYRIGHT="\u00A9 | 2025 All Rights Reserved"
