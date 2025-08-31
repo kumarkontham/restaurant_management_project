@@ -41,14 +41,9 @@
         {% endblock %}
         <footer class="footer">
             <div>
-                <ul>
-                    {% for i in location %}
-                        <li>{{i.address}}</li>
-                        <li>{{i.city}}</li>
-                        <li>{{i.state}}</li>
-                        <li>{{i.zipcode}}</li>
-                    {% endfor %}
-                </ul>
+                {% for ad in location %}
+                    <span>{{ad.address}}|{{ad.city}}|{{ad.state}}|{{ad.zipcode}}</span>
+                {% endfor %} 
             </div>
             <span>Opening Hours:
             <small class="timings">
