@@ -80,6 +80,7 @@ class Restaurant(models.Model):
     address = models.CharField(max_length=100,blank=True,null=True)
     Mobile_number = models.CharField(max_length=15)
     opening_hours = models.JSONField(default=dict)
+    logo = models.ImageField(upload_to="menu_items/",blank=True,null=True)
     def __str__(self):
         return f"{self.name}" 
 class Menuitem(models.Model):
