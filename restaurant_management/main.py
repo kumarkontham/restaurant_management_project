@@ -60,6 +60,7 @@ def home_view(request):
             form = ContactForm()
     location = Location.objects.first()
     restaurant=Restaurant.objects.first()
+
     restaurant_name=restaurant.restaurant_name if restaurant else settings.RESTAURANT_NAME 
     address = restaurant.address if restaurant else settings.RESTAURANT_ADDRESS
     map_src=None
@@ -74,6 +75,14 @@ def restaurant_info_view(request):
     context = {"history":"our restaurant is founded in 1995 with a vision of serving authenic local flavors",
     "mission":"To deliver exceptional culinary experiences in a warm, wellcomming environment."}
     return render(request,"home/about.html", context)
+def add_to_cart(request,product_id):
+    cart = get_or_create_cart(request)
+    menu_item = get_object_or_404(Menuitem,id=product_id)
+    item,created = CartItem.objects.get_or_create(cart = cart ,menu_item=menu_item)
+    if not created:
+        item.quantity+=1
+        item.save()
+    return redirect(cart)
     
 # class Feedback(models.Model):
 #     comment = models.TextField()
@@ -110,6 +119,16 @@ class Location(models.Model):
     zipcode = models.CharField(max_length=6)
     def __str__(self):
         return f"{self.address}"
+class Cart(models.Model):
+    user = models.ForeignKey(User,on_delete=models.CASCADE)
+    created_at = models.DateTimeField(auto_now_add=True)
+    def total_items(self):
+        return sum(item.quantity for item in self.items.all())
+class CartItem(models.Model):
+    menu_item = models.ForeignKey(Menuitem,on_delete=models.CASCADE)
+    quantity = models.PositiveIntegerField(default=1)
+    def __str__(self):
+        return f"{self.quantity} {self.menu_item.name}"
 """Run the commands for update data in the database 
 python manage.py makemigrations
 python manage.py migrate"""  
@@ -151,6 +170,10 @@ class ContactForm(forms.ModelForm):
     class Meta:
         model=Contact
         fields=["name","email","message"]
+#contextprocessors.py
+def cart_items_count(request):
+    cart = get_or_create_cart(request)
+    return {"cart_item_count":cart.total_items}
 # class FeedbackForm(forms.ModelForm):
 #     class Meta:
 #         model = Feedback
