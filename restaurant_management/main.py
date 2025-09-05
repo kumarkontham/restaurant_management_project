@@ -70,6 +70,8 @@ def menu_view(request):
     menu_items = Menuitem.objects.all()
     context = {"menu_items":menu_items}
     return render(request,"home/menu.html",context)
+def restaurant_info_view(request):
+    
 # class Feedback(models.Model):
 #     comment = models.TextField()
 #     created_at = models.DateTimeField(auto_now_add=True)
