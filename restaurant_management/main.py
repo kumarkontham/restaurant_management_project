@@ -47,6 +47,7 @@ def home_view(request):
         if form.is_valid():
             name =form.cleaned_data["name"]
             email=form.cleaned_data["email"]
+            message = form.cleaned_data["message"]
             subject= f"new contact form from {name}"
             send_mail(
                 subject,
@@ -93,6 +94,7 @@ class Menuitem(models.Model):
 class Contact(models.Model):
     name=models.CharField(max_length=30)
     email=models.EmailField(required=True,unique=True)
+    message = models.TextField(required=True)
     submitted_at = models.DateTimeField(auto_now_add=True)
     def __str__(self):
         return f"{self.name}-{self.email}"
@@ -143,7 +145,7 @@ python manage.py migrate"""
 class ContactForm(forms.ModelForm):
     class Meta:
         model=Contact
-        fields=["name","email"]
+        fields=["name","email","message"]
 # class FeedbackForm(forms.ModelForm):
 #     class Meta:
 #         model = Feedback
