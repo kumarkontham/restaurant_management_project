@@ -46,7 +46,7 @@ def home_view(request):
         form = ContactForm(request.POST)
         if form.is_valid():
             name =form.cleaned_data["name"]
-            email =form.cleaned_data["email"]
+            email=form.cleaned_data["email"]
             subject= f"new contact form from {name}"
             send_mail(
                 subject,
@@ -92,7 +92,7 @@ class Menuitem(models.Model):
         return self.item_name
 class Contact(models.Model):
     name=models.CharField(max_length=30)
-    email=models.EmailField(unique=True)
+    email=models.EmailField(required=True,unique=True)
     submitted_at = models.DateTimeField(auto_now_add=True)
     def __str__(self):
         return f"{self.name}-{self.email}"
