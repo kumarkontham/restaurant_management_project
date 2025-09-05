@@ -82,7 +82,7 @@ def add_to_cart(request,product_id):
     if not created:
         item.quantity+=1
         item.save()
-    return redirect(cart)
+    return redirect(menu_view)
     
 # class Feedback(models.Model):
 #     comment = models.TextField()
