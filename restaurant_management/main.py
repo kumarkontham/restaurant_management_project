@@ -71,9 +71,9 @@ def menu_view(request):
     context = {"menu_items":menu_items}
     return render(request,"home/menu.html",context)
 def restaurant_info_view(request):
-    context = {"history":"our restaurant is founded in 195 with a vision of serving authenic local flavors",
-    "mission":"to deliver exceptional culinary experiences in a warm, wellcomming environment."}
-    return render(request,"home/about.html",context)
+    context = {"history":"our restaurant is founded in 1995 with a vision of serving authenic local flavors",
+    "mission":"To deliver exceptional culinary experiences in a warm, wellcomming environment."}
+    return render(request,"home/about.html", context)
     
 # class Feedback(models.Model):
 #     comment = models.TextField()
