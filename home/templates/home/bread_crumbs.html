@@ -1,0 +1,13 @@
+<html>
+    <head></head>
+    <body>
+        <div>
+            {%if bread_crumbs%}
+            <nav aria-label="bread_crumbs">
+                {%for name,url in bread_crumbs %}
+                <a>{{name}}|{{url}}</a>
+                {%endfor%}
+            </nav>
+        </div>
+    </body>
+</html>
