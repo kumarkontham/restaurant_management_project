@@ -8,7 +8,7 @@
         <link rel="stylesheet" href="{% static 'home.css' %}">
     </head>
     <body>
-        <header>
+        <header class="header">
             <img src="{{restaurant.image.url}}">
             <p>Date:{%current_datetime%}</p>
             <h5>
@@ -25,8 +25,8 @@
             </nav>
         </header>
         {% block content%}
-        <main>
-            <ul>
+        <main class="container">
+            <ul class="menu">
             {%for item in menu_items%}
             <li>
                 <span>{{item.name}}</span>
