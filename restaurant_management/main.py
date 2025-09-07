@@ -37,6 +37,8 @@ RESTAURANT_ADDRESS = "1/34 road no:12 hyderabad area"
 #     """
 #     return HttpResponse(html)
 #views.py
+def faq_view(request):
+    return render(request,"home/faq.html")
 def home_view(request):
     if request.method =="GET":
         query = request.GET.get('q')
