@@ -92,7 +92,7 @@ def login_view(request):
             username=form.cleaned_data.get("username")
             password = form.cleaned_data.get("password")
             user = authenticate(request,username=username,password=password)
-            if user is not None:
+            if user:
                 login(request,user)
                 messages.success(request,"login successfully!")
                 return redirect("home")
@@ -101,7 +101,6 @@ def login_view(request):
     else:
         form = LoginForm()
     return render(request,"login.html",{"form":"form"})
-
 # class Feedback(models.Model):
 #     comment = models.TextField()
 #     created_at = models.DateTimeField(auto_now_add=True)
