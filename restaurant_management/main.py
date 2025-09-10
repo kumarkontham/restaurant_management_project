@@ -11,6 +11,7 @@ from rest_framework.views import APIView
 from rest_framework import serializers
 from django.urls import reverse
 from django.core.mail import send_mail
+from django.contrib.auth import authenticate,login 
 #settings.py
 RESTAURANT_ADDRESS = "1/34 road no:12 hyderabad area"
 # COPYRIGHT="\u00A9 | 2025 All Rights Reserved"
@@ -239,6 +240,7 @@ def cart_items_count(request):
 urlpatterns =[
     path("",views.home_view,name = "home_page"),
     path("menu/",views.menu_view,name="menu_items"),
+    path("login/",views.login_view,name="login_view"),
     # path("feedback/",views.feedback_view,name="feedback_form"),
 ]
 def display_success_message():
