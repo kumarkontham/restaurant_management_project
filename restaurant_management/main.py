@@ -85,7 +85,23 @@ def add_to_cart(request,product_id):
         item.quantity+=1
         item.save()
     return redirect(menu_view)
-    
+def login_view(request):
+    if request.method=="POST":
+        form = LoginForm(request.POST)
+        if form.is_valid():
+            username=form.cleaned_data.get("username")
+            password = form.cleaned_data.get("password")
+            user = authenticate(request,username=username,password=password)
+            if user is not None:
+                login(request,user)
+                messages.success(request,"login successfully!")
+                return redirect("home")
+            else:
+                messages.error(request,"Invalid username or password!")
+    else:
+        form = LoginForm()
+    return render(request,"login.html",{"form":"form"})
+
 # class Feedback(models.Model):
 #     comment = models.TextField()
 #     created_at = models.DateTimeField(auto_now_add=True)
@@ -172,6 +188,9 @@ class ContactForm(forms.ModelForm):
     class Meta:
         model=Contact
         fields=["name","email","message"]
+class LoginForm(forms.ModelForm):
+    username = forms.CharField(max_length=150,widget=forms.Textinput(attrs={"class":"form-control"}))
+    password = forms.CharField(widget=forms.PasswordInput(attrs={"class":"form-control"}))
 #contextprocessors.py
 def cart_items_count(request):
     cart = get_or_create_cart(request)
