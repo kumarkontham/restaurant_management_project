@@ -40,7 +40,6 @@ def home_view(request):
         form = ContactForm()
     location = Location.objects.first()
     restaurant=Restaurant.objects.first()
-
     restaurant_name=restaurant.restaurant_name if restaurant else settings.RESTAURANT_NAME 
     address = restaurant.address if restaurant else settings.RESTAURANT_ADDRESS
     map_src=None
