@@ -6,6 +6,18 @@
         <meta charset="UTF-8">
         <title>{%block title}Restaurant name{%endblock%}</title>
         <link rel="stylesheet" href="{% static 'home.css' %}">
+        <style>
+            .order_now_button{
+            width:50%;
+            border-radius:20px;
+            background:blue;
+            color:white;
+            height:35px;
+            }
+            .order_now_button:hover{
+            cursor:pointer;
+            }
+            </style>
     </head>
     <body>
         <header class="header">
@@ -29,9 +41,11 @@
             <ul class="menu">
             {%for item in menu_items%}
             <li>
+                <img src="{{item.image.url}}">
                 <span>{{item.name}}</span>
                 <span>{{item.description}}</span>
                 <span>{{item.price}}</span>
+                <button type="submit" class="order_now_button">Order Now</button>
             </li>
             {%endfor%}
             </ul>
