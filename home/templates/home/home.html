@@ -43,6 +43,15 @@
         </header>
         {% block content%}
         <main class="container">
+            <div class="spe-container">
+                {% for speccial_item in specials %}
+                <div>
+                    <p>{{speccial_item.item_name}}</p>
+                    <span>{{speccial_item.description}}</span>
+                    <p>{{speccial_item.price}}</p>
+                </div>
+                {%endfor%}
+            </div>
             <ul class="menu">
             {%for item in menu_items%}
             <li>
