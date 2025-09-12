@@ -38,13 +38,14 @@ def home_view(request):
             return render(request,"home/contact_success.html")
     else:
         form = ContactForm()
+    specials = Special.objects.all()
     location = Location.objects.first()
     restaurant=Restaurant.objects.first()
     restaurant_name=restaurant.restaurant_name if restaurant else settings.RESTAURANT_NAME 
     address = restaurant.address if restaurant else settings.RESTAURANT_ADDRESS
     map_src=None
     maps_link = f"https://www.google.com/maps/search/?api=1&query={quote_plus(address)}"if address else None
-    context = {"restaurant_name":restaurant_name,"restaurant_address":address,"maps_link":maps_link,"form":form,"location":location}
+    context = {"restaurant_name":restaurant_name,"restaurant_address":address,"maps_link":maps_link,"form":form,"location":location,"specials":specials}
     return render(request,"home/home.html",context)
 def menu_view(request):
     menu_items = Menuitem.objects.all()
@@ -101,6 +102,12 @@ class Contact(models.Model):
     submitted_at = models.DateTimeField(auto_now_add=True)
     def __str__(self):
         return f"{self.name}-{self.email}"
+class Special(models.Model):
+    item_name=models.CharField(max_length=250)
+    description = models.TextField()
+    price = models.DecimalField(max_digits=6,decimal_places=2)
+    def __str__(self):
+        return self.item_name
 class Location(models.Model):
     address = models.CharField(max_length=255)
     city = models.CharField(max_length=50)
