@@ -127,7 +127,12 @@ class CartItem(models.Model):
         return f"{self.quantity} {self.menu_item.name}"
 """Run the commands for update data in the database 
 python manage.py makemigrations
-python manage.py migrate"""  
+python manage.py migrate""" 
+class Feedback(models.Model):
+    name = models.CharField(max_length=100)
+    feedback = models.TextField()
+    def __str__(self):
+        return self.name 
 #forms.py
 class ContactForm(forms.ModelForm):
     class Meta:
@@ -140,6 +145,7 @@ class LoginForm(forms.ModelForm):
 def cart_items_count(request):
     cart = get_or_create_cart(request)
     return {"cart_item_count":cart.total_items}
+
 #urls.py
 urlpatterns =[
     path("",views.home_view,name = "home_page"),
