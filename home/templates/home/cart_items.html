@@ -1,0 +1,15 @@
+<html>
+    <head>
+        <title>Cart items</title>
+    </head>
+    <body>
+        {%for item in cart_items %}
+        <div>
+            <img src="{{item.image.url}}" alt="{{item.name}}">
+            <p>{{item.name}}</p>
+            <p>{{item.description}}</p>
+            <span>{{item.price}}</span>
+        </div>
+        {%endfor%}
+    </body>
+</html>
