@@ -6,6 +6,6 @@ class OrderStatus(models.Model):
     def __str__(self):
         return self.name
 class Order(models.Model):
-    status = models.ForeignKeyField('OrderStatus',on_delete = models.SET_Null,null=True,blank=True,related_name='orders')
+    status = models.ForeignKey('OrderStatus',on_delete = models.SET_Null,null=True,blank=True,related_name='orders')
     def __str__(self):
         return f"{self.pk} {self.status}"
