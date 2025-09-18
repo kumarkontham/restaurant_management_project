@@ -1,3 +1,5 @@
+import string 
+import secrets
 from urllib.parse import quote_plus
 from django.db import models
 from django.http import HttpResponse
@@ -79,9 +81,13 @@ def login_view(request):
     else:
         form = LoginForm()
     return render(request,"login.html",{"form":"form"})
-def ListAPIView(generics.ListAPIView):
+class ListAPIView(generics.ListAPIView):
     query_set = MenuCategory.objects.all()
     serializer_class = MenuCategorySerializer 
+def create_coupon():
+    code = generate_coupon_code(length=12)
+    coupon=Coupon.objects.create(code=code)
+    return coupon
 #models.py
 class MenuCategory(models.Model):
     name = models.CharField(max_length=100)
@@ -140,6 +146,10 @@ class Feedback(models.Model):
     feedback = models.TextField()
     def __str__(self):
         return self.name 
+class Coupon(models.Model):
+    code = models.CharField(max_length=25,unique=True)
+    def __str__(self):
+        return self.code
 #home/serializers.py
 class MenuCategorySerializer(serializers.ModelSerializer):
     class Meta:
@@ -158,6 +168,16 @@ class LoginForm(forms.ModelForm):
 def cart_items_count(request):
     cart = get_or_create_cart(request)
     return {"cart_item_count":cart.total_items}
+#orders/utils.py
+def generate_coupon_code(length:int=10,max_attempts:int=1000):
+    alphabet = string.ascii_uppercase+string.digits 
+    for attempt in range(max_attempts):
+        code = "".join(secrets.choice(alphabet) for _ in range(length))
+        if not Coupon.objects.filter(code=code).exists():
+            return code 
+
+    raise ValueError("reach the attempts")
+
 
 #urls.py
 urlpatterns =[
