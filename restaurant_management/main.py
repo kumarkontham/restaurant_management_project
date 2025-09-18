@@ -79,7 +79,14 @@ def login_view(request):
     else:
         form = LoginForm()
     return render(request,"login.html",{"form":"form"})
+def MenuCategoryAPIView(generics.ListAPIview):
+    query_set = MenuCategory.objects.all()
+    serializer_class = MenuCategorySerializer 
 #models.py
+class MenuCategory(models.Model):
+    name = models.CharField(max_length=100)
+    def __str__(self):
+        return self.name
 class Restaurant(models.Model):
     name=models.CharField(max_length=30,blank=True,null=True)
     address = models.CharField(max_length=100,blank=True,null=True)
@@ -133,6 +140,12 @@ class Feedback(models.Model):
     feedback = models.TextField()
     def __str__(self):
         return self.name 
+#home/serializers.py
+class MenuCategorySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = MenuCategory
+        fields = ["name"]
+
 #forms.py
 class ContactForm(forms.ModelForm):
     class Meta:
@@ -151,6 +164,7 @@ urlpatterns =[
     path("",views.home_view,name = "home_page"),
     path("menu/",views.menu_view,name="menu_items"),
     path("login/",views.login_view,name="login_view"),
+    path("MenuAPI/",MenuCategoryAPIView.as_view(),name= "menuAPI")
     # path("feedback/",views.feedback_view,name="feedback_form"),
 ]
 def display_success_message():
