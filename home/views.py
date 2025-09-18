@@ -1,10 +1,11 @@
+from rest_framework import generics 
 from django.conf import settings
 from django.http import JsonResponse,HttpResponse
 from django.shortcuts import render,redirect
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from rest_framework.views import APIView
-from .models import Restaurant,MenuItems
+from .models import Restaurant,MenuItems,MenuCategory
 from rest_framework import status
 form .serializres import MenuCategorySerializer
 def home_page(request):
@@ -34,6 +35,10 @@ class MenuAPIView(APIView):
     def get(self,request):
         menu = [{"name":"chicken biryani","description":"fresh chicken in used self made masala","price":300},{"name":"SambarRice","description":"home style preparation","price":199},{"name":"tiffin","description":"all types of  tiffins","price":45}]
         return Response(menu,status=status.HTTP_200_OK)
+class MenuCategoryAPIview(generics.ListAPIview):
+    query_set = MenuCategory.objects.all()
+    serializr_class = MenuCategorySerializer
+    
 
 
 
