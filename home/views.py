@@ -6,6 +6,7 @@ from rest_framework.decorators import api_view
 from rest_framework.views import APIView
 from .models import Restaurant,MenuItems
 from rest_framework import status
+form .serializres import MenuCategorySerializer
 def home_page(request):
     """display restaurantname on the home page
     fetch from the database if available otherwise get the name from settings file
