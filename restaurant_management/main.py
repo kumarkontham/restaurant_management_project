@@ -79,7 +79,7 @@ def login_view(request):
     else:
         form = LoginForm()
     return render(request,"login.html",{"form":"form"})
-def ListAPIview(generics.ListAPIview):
+def ListAPIView(generics.ListAPIView):
     query_set = MenuCategory.objects.all()
     serializer_class = MenuCategorySerializer 
 #models.py
