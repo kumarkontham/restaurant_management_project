@@ -79,7 +79,7 @@ def login_view(request):
     else:
         form = LoginForm()
     return render(request,"login.html",{"form":"form"})
-def MenuCategoryAPIView(generics.ListAPIview):
+def ListAPIview(generics.ListAPIview):
     query_set = MenuCategory.objects.all()
     serializer_class = MenuCategorySerializer 
 #models.py
@@ -164,7 +164,7 @@ urlpatterns =[
     path("",views.home_view,name = "home_page"),
     path("menu/",views.menu_view,name="menu_items"),
     path("login/",views.login_view,name="login_view"),
-    path("MenuAPI/",MenuCategoryAPIView.as_view(),name= "menuAPI")
+    path("MenuAPI/",ListAPIView.as_view(),name= "menuAPI")
     # path("feedback/",views.feedback_view,name="feedback_form"),
 ]
 def display_success_message():
