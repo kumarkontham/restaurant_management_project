@@ -88,6 +88,16 @@ def create_coupon():
     code = generate_coupon_code(length=12)
     coupon=Coupon.objects.create(code=code)
     return coupon
+class MenuItemAPIView(APIView):
+    permission_classes = [permissions.AllowAny]
+    def get(self,request,format=None):
+        q=request.GET.get("q",None)
+        query_set = Menu_items.objects.all()
+        if q:
+            queryset =query_set.filter(name__icontains=q)
+        queryset = queryset.order_by("name")
+        serializer = MenuItemSerializer(serializer.data)
+        return Response(serializer.data)
 #models.py
 class MenuCategory(models.Model):
     name = models.CharField(max_length=100)
@@ -155,6 +165,10 @@ class MenuCategorySerializer(serializers.ModelSerializer):
     class Meta:
         model = MenuCategory
         fields = ["name"]
+class MenuItemSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Menuitem
+        fields=["image","item_name","description","price"]
 
 #forms.py
 class ContactForm(forms.ModelForm):
