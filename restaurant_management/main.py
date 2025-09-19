@@ -98,6 +98,28 @@ class MenuItemAPIView(APIView):
         queryset = queryset.order_by("name")
         serializer = MenuItemSerializer(serializer.data)
         return Response(serializer.data)
+class MenuItemUpdateView(APIView):
+    permission_classes=[IsAdminUser]
+    def put(self,request,pk,format=None):
+        menu_item = get_object_or_404(MenuItem,pk=pk)
+        serializer=MenuItemSerializer(menu_item,data=request.data)
+        if serializer.is_valid():
+            try:
+                serializer.save()
+            except Exception as e:
+                return Response({"error":"error while creating the menu item"},status=status.HTTP_500_INTERNAL_SERVER_ERROR,)
+            return Response(serializer.data,status=status.HTTP_200_OK)
+        return Response(serializer.errors,status=status.HTTP_400_BAD_REQUEST)
+    def patch(self,request,pk,format=None):
+        menu_item=get_object_or_404(Menuitem,pk=pk)
+        serializer=MenuItemSerializer(menu_item,data=request.data,partial=True)
+        if serializer.is_valid():
+            try:
+                serializer.save()
+            except Exception as e:
+                return Response({"error":"error while updating menuitem "},status=status.HTTP_400_BAD_REQUEST)
+            return Response(serializer.data,status=status.HTTP_200_OK)
+        return Response(serializer.errors)
 #models.py
 class MenuCategory(models.Model):
     name = models.CharField(max_length=100)
@@ -168,7 +190,7 @@ class MenuCategorySerializer(serializers.ModelSerializer):
 class MenuItemSerializer(serializers.ModelSerializer):
     class Meta:
         model = Menuitem
-        fields=["image","item_name","description","price"]
+        fields=["id","image","item_name","description","price"]
 
 #forms.py
 class ContactForm(forms.ModelForm):
