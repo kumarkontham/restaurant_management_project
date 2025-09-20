@@ -131,7 +131,7 @@ class MenuItemUpdateView(APIView):
         return Response(serializer.errors)
 class OredersAPIView(APIView):
     permission_classes = [IsAuthenticated]
-    def get(self,request):
+    def get(self,request,format=None):
         user = request.user
         orders = Order.objects.filter(user=user).order_by('-created_at')
         serializer=OrdersViewSerializer(orders,many=True)
