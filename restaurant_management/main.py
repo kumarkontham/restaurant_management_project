@@ -129,6 +129,13 @@ class MenuItemUpdateView(APIView):
                 return Response({"error":"error while updating menuitem "},status=status.HTTP_400_BAD_REQUEST)
             return Response(serializer.data,status=status.HTTP_200_OK)
         return Response(serializer.errors)
+class OredersAPIView(APIView):
+    permission_classes=[IsAuthenticated]
+    def get(self,request,format=None):
+        user = request.user
+        orders = Order.objects.filter(user=user).order_by('-created_at')
+        serializer=OrdersViewSerializer(orders,many=True)
+        return Response(serializer.data,status=status.HTTP_200_OK)
 #models.py
 class MenuCategory(models.Model):
     name = models.CharField(max_length=100)
@@ -170,6 +177,11 @@ class Location(models.Model):
     zipcode = models.CharField(max_length=6)
     def __str__(self):
         return f"{self.address}"
+class Order(models.Model):
+    user = models.ForeignKey(User,related_name="orders",on_delete=models.CASCADE)
+    created_at=models.DateTimeField(auto_now_add=True)
+    total_price=models.DecimalField(max_digits=10,decimal_places=2)
+
 class Cart(models.Model):
     user = models.ForeignKey(User,on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -201,7 +213,10 @@ class MenuItemSerializer(serializers.ModelSerializer):
     class Meta:
         model = Menuitem
         fields=["id","image","item_name","description","price","category"]
-
+class OrdersViewSerializer(serializers.ModelSerializer):
+    class Meta:
+        model=Order
+        fields =["id","created_at","total_price"]
 #forms.py
 class ContactForm(forms.ModelForm):
     class Meta:
