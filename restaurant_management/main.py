@@ -254,8 +254,7 @@ def email_validation(email:str):
         logger.warning("Invalid Email")
     except Exception as e:
         logger.error(f"error when validate email")
-        return False 
-
+        return False"error during the email validation."
 #urls.py
 urlpatterns =[
     path("",views.home_view,name = "home_page"),
