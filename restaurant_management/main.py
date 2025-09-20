@@ -130,12 +130,12 @@ class MenuItemUpdateView(APIView):
             return Response(serializer.data,status=status.HTTP_200_OK)
         return Response(serializer.errors)
 class OredersAPIView(APIView):
-    permission_classes=[IsAuthenticated]
-    def get(self,request,format=None):
+    permission_classes = [IsAuthenticated]
+    def get(self,request):
         user = request.user
         orders = Order.objects.filter(user=user).order_by('-created_at')
         serializer=OrdersViewSerializer(orders,many=True)
-        return Response(serializer.data,status=status.HTTP_200_OK)
+        return Response(serializer.data,status=status.HTTP_201_CREATED)
 #models.py
 class MenuCategory(models.Model):
     name = models.CharField(max_length=100)
