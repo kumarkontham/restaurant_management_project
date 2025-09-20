@@ -81,6 +81,15 @@ def login_view(request):
     else:
         form = LoginForm()
     return render(request,"login.html",{"form":"form"})
+class ItemsCategory(APIView):
+    def get(self,request,format=None):
+        category_name = request.query_params.get('category',None)
+        if category_name:
+            menu_items=MenuItem.objects.filter(category__name__iexact=category_name)
+        else:
+            menu_items=MenuItem.objects.all()
+        serializer=MenuCategorySerializer(menu_items,many=True)
+        return Response(serializer.data,status=status.HTTP_200_OK)
 class ListAPIView(generics.ListAPIView):
     query_set = MenuCategory.objects.all()
     serializer_class = MenuCategorySerializer 
@@ -138,6 +147,7 @@ class Menuitem(models.Model):
     description = models.TextField()
     price = models.DecimalField(max_digits=5,decimal_places=2)
     image = models.ImageField(upload_to = 'menu_items/',blank=True,null=True)
+    category = models.ForeignKey(MenuCategory,related_name="menu_item",on_delete=models.CASCADE)
     def __str__(self):
         return self.item_name
 class Contact(models.Model):
@@ -190,7 +200,7 @@ class MenuCategorySerializer(serializers.ModelSerializer):
 class MenuItemSerializer(serializers.ModelSerializer):
     class Meta:
         model = Menuitem
-        fields=["id","image","item_name","description","price"]
+        fields=["id","image","item_name","description","price","category"]
 
 #forms.py
 class ContactForm(forms.ModelForm):
