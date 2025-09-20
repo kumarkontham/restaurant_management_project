@@ -1,6 +1,8 @@
 import string 
+import logging
 import secrets
 from urllib.parse import quote_plus
+import email_validator import validate_email,EmailNotValidError
 from django.db import models
 from django.http import HttpResponse
 from rest_framework import status
@@ -239,6 +241,20 @@ def generate_coupon_code(length:int=10,max_attempts:int=1000):
 
     raise ValueError("reach the attempts")
 
+#utils/validation_utils.py
+logger = logging.get_logger(__name__)
+def email_validation(email:str):
+    if not email:
+        return False
+    try:
+        result = validate_email(email,check_deliverability=False)
+        normalized = result.email
+        return True
+    except EmailNotValidError as e:
+        logger.warning("Invalid Email")
+    except Exception as e:
+        logger.error(f"error when validate email")
+        return False 
 
 #urls.py
 urlpatterns =[
