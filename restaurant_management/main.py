@@ -182,7 +182,7 @@ class Location(models.Model):
 class Order(models.Model):
     order_id = models.CharField(max_length=100,unique=True)
     user = models.ForeignKey(User,related_name="orders",on_delete=models.CASCADE)
-    order_items = models.MenyToManyField(MenuItem,related_name="oredr_items")
+    order_items = models.ManyToManyField(MenuItem,related_name="oredr_items")
     created_at=models.DateTimeField(auto_now_add=True)
     total_price=models.DecimalField(max_digits=10,decimal_places=2)
     def __str__(self):
