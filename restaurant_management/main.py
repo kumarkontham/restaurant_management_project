@@ -244,7 +244,25 @@ def generate_coupon_code(length:int=10,max_attempts:int=1000):
             return code 
 
     raise ValueError("reach the attempts")
-
+#utils/email.py
+def send_order_confirmation_email(order_id,email,name,order_items,total_price):
+    subject = f"order confirmation email for - {order_id}"
+    item_list = "/n".join([f"{item}" for item in order_items])
+    message = (f"Dear {name}\n
+    Thank you for your order - {order_id}\n
+    Items : {items_list}\n
+    Total_Price:{total_price}.")
+    from_email = settings.DEFAULT_FROM_EMAIL
+    try:
+        send_mail(subject, message, from_email, [email])
+        logger.info(f"order conformation email sent to customer {email} for {order_id}")
+        return {"status":"SUCCESS","message":"message sent successfully!."}
+    except BadHeaderError:
+        logger.error(f"Bad header error while sending email to {email}")
+        return {"status":"error"}
+    except Exception as e:
+        logger.exception(f"failed send email to {email}")
+        return {"message":"failed to send email"}
 #utils/validation_utils.py
 logger = logging.get_logger(__name__)
 def email_validation(email:str):
