@@ -180,9 +180,13 @@ class Location(models.Model):
     def __str__(self):
         return f"{self.address}"
 class Order(models.Model):
+    order_id = models.CharField(max_length=100,unique=True)
     user = models.ForeignKey(User,related_name="orders",on_delete=models.CASCADE)
+    order_items = models.MenyToManyField(MenuItem,related_name="oredr_items")
     created_at=models.DateTimeField(auto_now_add=True)
     total_price=models.DecimalField(max_digits=10,decimal_places=2)
+    def __str__(self):
+        return self.order_id
 
 class Cart(models.Model):
     user = models.ForeignKey(User,on_delete=models.CASCADE)
@@ -218,7 +222,7 @@ class MenuItemSerializer(serializers.ModelSerializer):
 class OrdersViewSerializer(serializers.ModelSerializer):
     class Meta:
         model=Order
-        fields =["id","created_at","total_price"]
+        fields =["order_id","user","order_items","created_at","total_price"]
 #forms.py
 class ContactForm(forms.ModelForm):
     class Meta:
