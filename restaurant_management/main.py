@@ -149,6 +149,7 @@ class Restaurant(models.Model):
     Mobile_number = models.CharField(max_length=15)
     opening_hours = models.JSONField(default=dict)
     logo = models.ImageField(upload_to="menu_items/",blank=True,null=True)
+    operating_days = models.CharField(max_length=50,help_text = " eg: 'Mon,Tue,Wed,Thu,Fri'")
     def __str__(self):
         return f"{self.name},{self.mobile_number}" 
 class Menuitem(models.Model):
