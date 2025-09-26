@@ -235,6 +235,23 @@ class LoginForm(forms.ModelForm):
 def cart_items_count(request):
     cart = get_or_create_cart(request)
     return {"cart_item_count":cart.total_items}
+#orders/models.py
+class ActiveOrderManager(models.Manager):
+    def get_active_orders(self):
+        return self.filter(status__in = ["Pending","Processing"])
+class Order(models.Model):
+    STATUS_CHOICES = [('pending',"Pending"),
+                    ("processing","Processing"),
+                    ("shipped","Shipped"),
+                    ("delivered","Delivered"),
+                    ("cancelled","Cancelled"),]
+    status = models.CharField(max_length=100,choices=STATUS_CHOICES)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now_add=True)
+    objects = ActiveOrderManager()
+#python shell
+active_orders = Order.objects.get_active_orders()
+print(active_orders)
 #orders/utils.py
 def generate_coupon_code(length:int=10,max_attempts:int=1000):
     alphabet = string.ascii_uppercase+string.digits 
