@@ -138,6 +138,14 @@ class OredersAPIView(APIView):
         orders = Order.objects.filter(user=user).order_by('-created_at')
         serializer=OrdersViewSerializer(orders,many=True)
         return Response(serializer.data,status=status.HTTP_201_CREATED)
+class UserProfileViewset(APIView):
+    permission_classes = [permissions.IsAuthenticated]
+    def put(self,request):
+        serializer = UserPrifileSerializer(request.user,data=request.data,partial=True)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data,status=status.HTTP_200_OK)
+        return Response(serializer.errors,status=status.HTTP_400_BAD_REQUEST)
 #models.py
 class MenuCategory(models.Model):
     name = models.CharField(max_length=100)
@@ -212,6 +220,10 @@ class Coupon(models.Model):
     def __str__(self):
         return self.code
 #home/serializers.py
+class UserPrifileSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ["first_name","last_name","email"]
 class MenuCategorySerializer(serializers.ModelSerializer):
     class Meta:
         model = MenuCategory
