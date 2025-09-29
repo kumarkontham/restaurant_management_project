@@ -179,7 +179,7 @@ class OrderCancelAPIView(APIView):
                 return Response({"error":"you are not authorized to cancel the order."},status=status.HTTP_403_FORBIDDEN)
             if order.status == "Cancelled":
                 return Response({"message":" already oreder has cancelled!."},status=status.HTTP_200_OK) 
-            order.status="Cancelled":
+            order.status = "Cancelled":
             order.save()
             return Response({"message":"order cancelled successfully!."},status=status.HTTP_200_OK)
         except Order.DoesNotExist:
