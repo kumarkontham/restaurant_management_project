@@ -16,6 +16,7 @@ from rest_framework import serializers
 from django.urls import reverse
 from django.core.mail import send_mail
 from django.contrib.auth import authenticate,login 
+from rest_framework.generics import CreateAPIView
 #settings.py
 RESTAURANT_ADDRESS = "1/34 road no:12 hyderabad area"
 #views.py
@@ -150,6 +151,15 @@ def create_order(request):
     order = Order.objects.create(
         order_id=generate_unique_order_id(prefix="ORD")
     ) 
+class ContactFormSubmissionView(CreateAPIView):
+    queryset = ContactFormSubmission.objects.all()
+    serializer_class = ContactFormSubmissionser
+    def create(self,request,*args,**kwargs):
+        serializer = self.get_serializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data,{"message":"ContactFormSubmittedSuccessfully."},status=status.HTTP_201_CREATED)
+        return Response(serializer.errors,status=status.HTTP_400_BAD_REQUEST)
 #models.py
 class MenuCategory(models.Model):
     name = models.CharField(max_length=100)
@@ -226,6 +236,13 @@ class Coupon(models.Model):
     code = models.CharField(max_length=25,unique=True)
     def __str__(self):
         return self.code
+class ContactFormSubmission(models.Model):
+    name = models.CharField(max_length=100)
+    email = models.EmailField(unique=True)
+    message = models.TextField()
+    submitted_at = models.DateTimeField(auto_now_add=True)
+    def __str__(self):
+        return self.email
 #home/serializers.py
 class UserPrifileSerializer(serializers.ModelSerializer):
     class Meta:
@@ -243,6 +260,10 @@ class OrdersViewSerializer(serializers.ModelSerializer):
     class Meta:
         model=Order
         fields =["order_id","user","order_items","created_at","total_price"]
+class ContactFormSubmissionser(serializers.ModelSerializer):
+    class Meta:
+        model = ContactFormSubmission
+        fields = ['name','email','message','submitted_at']
 #forms.py
 class ContactForm(forms.ModelForm):
     class Meta:
