@@ -180,7 +180,7 @@ class OrderCancelAPIView(APIView):
             if order.status == "Cancelled":
                 return Response({"message":" already oreder has cancelled!."},status=status.HTTP_200_OK)
             else: 
-                order.status = "Cancelled":
+                order.status = "Cancelled"
                 order.save()
                 return Response({"message":"order cancelled successfully!."},status=status.HTTP_200_OK)
         except Order.DoesNotExist:
