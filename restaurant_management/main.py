@@ -160,6 +160,12 @@ class ContactFormSubmissionView(CreateAPIView):
             serializer.save()
             return Response(serializer.data,{"message":"ContactFormSubmittedSuccessfully."},status=status.HTTP_201_CREATED)
         return Response(serializer.errors,status=status.HTTP_400_BAD_REQUEST)
+class NotifyUser(APIView):
+    def Post(self,request):
+        email = request.data.get('email')
+        subject = "Welcome to our service"
+        message = "Thank you for signing Up"
+        
 #models.py
 class MenuCategory(models.Model):
     name = models.CharField(max_length=100)
