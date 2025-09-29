@@ -178,12 +178,13 @@ class OrderCancelAPIView(APIView):
             if order.user != request.user:
                 return Response({"error":"you are not authorized to cancel the order."},status=status.HTTP_403_FORBIDDEN)
             if order.status == "Cancelled":
-                return Response({"message":" already oreder has cancelled!."},status=status.HTTP_200_OK) 
-            order.status = "Cancelled":
-            order.save()
-            return Response({"message":"order cancelled successfully!."},status=status.HTTP_200_OK)
+                return Response({"message":" already oreder has cancelled!."},status=status.HTTP_200_OK)
+            else: 
+                order.status = "Cancelled":
+                order.save()
+                return Response({"message":"order cancelled successfully!."},status=status.HTTP_200_OK)
         except Order.DoesNotExist:
-            return Response({"error":"order not found"},status=status.HTTP_400_BAD_REQUEST)       
+            return Response({"error":"order not found!."},status=status.HTTP_400_BAD_REQUEST)       
 #models.py
 class MenuCategory(models.Model):
     name = models.CharField(max_length=100)
