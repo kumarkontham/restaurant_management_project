@@ -146,6 +146,10 @@ class UserProfileViewset(APIView):
             serializer.save()
             return Response(serializer.data,status=status.HTTP_200_OK)
         return Response(serializer.errors,status=status.HTTP_400_BAD_REQUEST)
+def create_oredr(request):
+    order = Order.objects.create(
+        order_id=generate_unique_order_id(prefix="ORD")
+    )
 #models.py
 class MenuCategory(models.Model):
     name = models.CharField(max_length=100)
@@ -194,9 +198,12 @@ class Order(models.Model):
     order_items = models.ManyToManyField(MenuItem,related_name="oredr_items")
     created_at=models.DateTimeField(auto_now_add=True)
     total_price=models.DecimalField(max_digits=10,decimal_places=2)
+    def save(self,*args,**kwargs):
+        if not self.order_id:
+            self.order_id = generate_unique_order_id(prefix="ORD")
+        super().save(*args,**kwargs)
     def __str__(self):
         return self.order_id
-
 class Cart(models.Model):
     user = models.ForeignKey(User,on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -293,6 +300,14 @@ def send_order_confirmation_email(order_id,email,name,order_items,total_price):
     except Exception as e:
         logger.exception(f"failed send email to {email}")
         return {"message":"failed to send email"}
+#orders/utils.py
+def generate_unique_order_id(length=8,prefix=None):
+    characters = string.ascii_uppercase+string.digits
+    while True:
+        random_part = ''.join(secrets.choice(characters) for _ in range(length))
+        order_id = f"{slugify(prefix)}-{random_part}" if prefix else random_part
+        if not Order.objects.filter(order_id=order_id).exists():
+            return order_id
 #utils/validation_utils.py
 logger = logging.get_logger(__name__)
 def email_validation(email:str):
