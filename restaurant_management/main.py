@@ -161,10 +161,17 @@ class ContactFormSubmissionView(CreateAPIView):
             return Response(serializer.data,{"message":"ContactFormSubmittedSuccessfully."},status=status.HTTP_201_CREATED)
         return Response(serializer.errors,status=status.HTTP_400_BAD_REQUEST)
 class NotifyUser(APIView):
-    def Post(self,request):
+    def post(self,request):
+        order_items = Order.objects.all()
         email = request.data.get('email')
-        subject = "Welcome to our service"
+        order_id = request.data.get('order_id')
         message = "Thank you for signing Up"
+        total_price = request.data.get('total_price')
+        name = request.data.get('name')
+        if send_order_confirmation_email(order_id,name,email,order_items,total_price):
+            return Response({"message":"email sent successfully!."})
+            
+
         
 #models.py
 class MenuCategory(models.Model):
