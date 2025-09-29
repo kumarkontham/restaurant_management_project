@@ -146,10 +146,10 @@ class UserProfileViewset(APIView):
             serializer.save()
             return Response(serializer.data,status=status.HTTP_200_OK)
         return Response(serializer.errors,status=status.HTTP_400_BAD_REQUEST)
-def create_oredr(request):
+def create_order(request):
     order = Order.objects.create(
         order_id=generate_unique_order_id(prefix="ORD")
-    )
+    ) 
 #models.py
 class MenuCategory(models.Model):
     name = models.CharField(max_length=100)
