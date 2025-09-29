@@ -1,6 +1,8 @@
 import string 
 import logging
 import secrets
+from django.test import TestCase
+from decimal import Decimal
 from urllib.parse import quote_plus
 import email_validator import validate_email,EmailNotValidError
 from django.db import models
@@ -239,6 +241,9 @@ class Order(models.Model):
         super().save(*args,**kwargs)
     def __str__(self):
         return self.order_id
+    def calculate_total(self):
+        total = sum(item.price*item.quantity for item in self.order_items.all())
+        return total.quantitize(Decimal('0.01'))
 class Cart(models.Model):
     user = models.ForeignKey(User,on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -376,6 +381,17 @@ urlpatterns =[
     path("MenuAPI/",ListAPIView.as_view(),name= "menuAPI")
     # path("feedback/",views.feedback_view,name="feedback_form"),
 ]
+#oredrs/tests.py
+class Order_total_test(TestCase):
+    def setup(self):
+        self.user = User.objects.create_user(username="testcase",password="pass")
+        self.item1 = MenuItem.objects.create(name = "burger",price=Decimal('5.00'))
+        self.item2 = MenuItem.objects.create(name = "Fries",price=Decimal('1.50'))
+        self.order = order.objects.create(user=self.user,order_id="ORD123")
+        CartItem.objects.create(order = self.order,MenuItem = self.item1.name,quantity=2,price=self.item1.price)
+        CartItem.objects.create(order = self.order,MenuItem=self.item2.name,quantity=1,price=self.item2.price)
+    def test_calculate_total(self):
+        total = self.order.calculate_total()
 def display_success_message():
     return "basic css styles added  successfully for the home page"  
 if __name__ == "__main__":
