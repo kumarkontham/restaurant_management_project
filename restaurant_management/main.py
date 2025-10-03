@@ -186,7 +186,21 @@ class OrderCancelAPIView(APIView):
                 order.save()
                 return Response({"message":"order cancelled successfully!."},status=status.HTTP_200_OK)
         except Order.DoesNotExist:
-            return Response({"error":"order not found!."},status=status.HTTP_400_BAD_REQUEST)       
+            return Response({"error":"order not found!."},status=status.HTTP_400_BAD_REQUEST)  
+class CouponValidationView(APIView):
+    def post(self,request):
+        code = request.data.get('code')
+        if not code:
+            return Response({"error":"coupon code is required. "},status=status.HTTP_400_BAD_REQUEST)
+        try:
+            coupon = Coupon.objects.get(code=code)
+        except Coupon.DoesNotExist:
+            return Response({"error":"Invalid coupon code. "},status=status.HTTP_400_BAD_REQUEST)
+        today = timezone.now().date()
+        if not coupon.is_active or coupon.valid_from > today or coupon.valid_until < today:
+            return Response({"error":"Coupon was not valid at this time. "},status=status.HTTP_400_BAD_REQUEST)  
+        return Response({"success":True,discount_percentage:float(coupon.discount_percentage)},status=status.HTTP_200_OK)
+           
 #models.py
 class MenuCategory(models.Model):
     name = models.CharField(max_length=100)
@@ -209,6 +223,14 @@ class Menuitem(models.Model):
     category = models.ForeignKey(MenuCategory,related_name="menu_item",on_delete=models.CASCADE)
     def __str__(self):
         return self.item_name
+class Coupon(models.Model):
+    code = models.CharField(max_length=50,unique=True)
+    discount_percentage = models.DecimalField(max_digits=5,decimal_places=2)
+    is_active = models.BooleanField(default=True)
+    valid_from = models.DateTimeField()
+    valid_until = models.DateTimeField()
+    def __str__(self):
+        return f"{self.code}-{self.discount_percentage}"
 class Contact(models.Model):
     name=models.CharField(max_length=30)
     email=models.EmailField(required=True,unique=True)
